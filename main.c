@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:26 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/17 03:48:36 by asuc             ###   ########.fr       */
+/*   Updated: 2023/11/26 14:54:17 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 	int *tab;
 	t_stack stack_a;
 	t_stack stack_b;
+	(void)stack_b;
 	srand(time(NULL));
 	while (i < 100) {
 		nombre = rand() % 101; // Génère un nombre entre 0 et 100
@@ -49,6 +50,12 @@ int main(int argc, char **argv)
 	if (range == -1)
 		return (-1);
 	fill_stack_from_array(&stack_a, tab, range);
+	while (i < range)
+	{
+		ft_printf("%d\n", stack_a.top->content);
+		stack_a.top = stack_a.top->next;
+		i++;
+	}
 	return (0);
 }
 
