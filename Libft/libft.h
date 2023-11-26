@@ -31,7 +31,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 char	**ft_split(const char *str, char charset);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);

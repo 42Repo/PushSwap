@@ -6,8 +6,14 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:44 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/13 19:38:35 by asuc             ###   ########.fr       */
+/*   Updated: 2023/11/16 20:33:26 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+int	putstr_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	return (-1);
+}

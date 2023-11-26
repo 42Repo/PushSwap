@@ -6,17 +6,17 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:46:50 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/09 02:16:37 by asuc             ###   ########.fr       */
+/*   Updated: 2023/11/16 20:36:42 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	sum;
+	long	i;
+	long	sign;
+	long	sum;
 
 	if (!str)
 		return (0);

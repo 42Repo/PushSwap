@@ -20,8 +20,8 @@ libft	=	Libft/
 SRC		=	main.c\
 			ft_push_swap.c\
 			ft_push_swap_utils.c\
-			ft_push_swap_input_fill.c\
-			ft_push_swap_input_check.c\
+			ft_push_swap_input_check_and_create_tab.c\
+			ft_push_swap_fill_stack.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -40,7 +40,6 @@ clean :
 	@make clean --no-print-directory -C $(libft)
 	@rm -f $(OBJ)
 	@echo "$(BRed)Erase .o files$(RESET)"
-
 
 fclean : clean
 	@make fclean --no-print-directory -C $(libft)

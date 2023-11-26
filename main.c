@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:26 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/13 19:08:28 by asuc             ###   ########.fr       */
+/*   Updated: 2023/11/17 03:48:36 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ int nombreEstUnique(int tableau[], int longueur, int nombre) {
 int main(int argc, char **argv)
 {
 	(void)argc;
-	(void)argv;
 	int nombres[100];
 	int nombre = 0;
 	int i = 0;
+	int range;
+	int *tab;
+	t_stack stack_a;
+	t_stack stack_b;
 	srand(time(NULL));
 	while (i < 100) {
 		nombre = rand() % 101; // Génère un nombre entre 0 et 100
@@ -40,7 +43,12 @@ int main(int argc, char **argv)
 		}
 	}
 	i = 0;
-	push_swap(nombres);
-	return	(0);
+	if (argc < 2)
+		return (0);
+	range = main_check_input_and_fill_tab(argv + 1, &tab);
+	if (range == -1)
+		return (-1);
+	fill_stack_from_array(&stack_a, tab, range);
+	return (0);
 }
 
