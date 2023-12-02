@@ -48,6 +48,9 @@ fclean : clean
 
 re : fclean all
 
+test : all
+	clear && make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -s ./push_swap  132132 321 4654 654 456
+
 .PHONY: all fclean clean re
 
 

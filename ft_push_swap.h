@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/01 04:13:29 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/01 19:54:36 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_list_node
 {
 	long long			content;
-	int 				index;
+	int					index;
 	struct s_list_node	*next;
 	struct s_list_node	*previous;
 }	t_list_node;

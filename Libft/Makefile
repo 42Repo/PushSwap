@@ -73,7 +73,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	@$(COMP) -fPIE $(CFLAGS) -o $@ -c $<
+	@$(COMP) -gdwarf-4 -fPIE $(CFLAGS) -o $@ -c $<
 
 $(NAME) : $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)

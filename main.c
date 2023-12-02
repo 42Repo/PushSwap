@@ -6,43 +6,38 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:26 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/27 22:04:38 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/01 20:00:14 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <time.h>
 #include "ft_push_swap.h"
 
-int nombreEstUnique(int tableau[], int longueur, int nombre) {
-	for (int i = 0; i < longueur; i++) {
-		if (tableau[i] == nombre) {
-			return 0; // Le nombre n'est pas unique
-		}
+void	free_stack(t_stack *stack)
+{
+	t_list_node	*tmp;
+
+	while (stack->top != NULL)
+	{
+		tmp = stack->top;
+		stack->top = stack->top->next;
+		free(tmp);
 	}
-	return 1; // Le nombre est unique
 }
 
-int main(int argc, char **argv)
+void	free_tab(int **tab)
 {
-	(void)argc;
-	int nombres[100];
-	int nombre = 0;
-	int i = 0;
-	int range;
-	int *tab;
-	t_stack stack_a;
-	t_stack stack_b;
-	(void)stack_b;
-	srand(time(NULL));
-	while (i < 100) {
-		nombre = rand() % 101; // Génère un nombre entre 0 et 100
+	free(*tab);
+	*tab = NULL;
+}
 
-		if (nombreEstUnique(nombres, i, nombre)) {
-			nombres[i] = nombre;
-			i++;
-		}
-	}
+int	main(int argc, char **argv)
+{
+	int		i;
+	int		range;
+	int		*tab;
+	t_stack	stack_a;
+	t_stack	stack_b;
+
 	i = 0;
 	if (argc < 2)
 		return (0);
@@ -56,6 +51,8 @@ int main(int argc, char **argv)
 		stack_a.top = stack_a.top->next;
 		i++;
 	}
+	free_tab(&tab);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }
-

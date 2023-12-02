@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:06:25 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/26 15:26:02 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/01 19:54:43 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	pa(t_stack *stack_a, t_stack *stack_b)
 	if (stack_b->top == NULL)
 		return (-1);
 	tmp = stack_b->top;
-	
 	return (0);
 }
 
