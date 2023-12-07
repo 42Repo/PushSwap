@@ -22,6 +22,13 @@ SRC		=	main.c\
 			ft_push_swap_utils.c\
 			ft_push_swap_input_check_and_create_tab.c\
 			ft_push_swap_fill_stack.c\
+			ft_push_swap_sort.c\
+			ft_push_swap_push.c\
+			ft_push_swap_reverse_rotate.c\
+			ft_push_swap_rotate.c\
+			ft_push_swap_swap.c\
+			ft_push_swap_sort_three.c
+
 
 OBJ = $(SRC:.c=.o)
 
