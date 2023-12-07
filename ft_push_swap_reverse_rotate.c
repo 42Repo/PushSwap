@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:45:18 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 14:42:30 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 17:56:07 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Le dernier élément devient le premier.*/
 int	reverse_rotate(t_stack *stack)
 {
-	t_list_node	*tmp;
+	t_node	*tmp;
 
 	if (stack == NULL || stack->top == NULL || stack->top->next == NULL)
 		return (-1);
@@ -32,11 +32,13 @@ int	reverse_rotate(t_stack *stack)
 
 int	rra(t_stack *stack_a)
 {
+	ft_printf("rra\n");
 	return (reverse_rotate(stack_a));
 }
 
 int	rrb(t_stack *stack_b)
 {
+	ft_printf("rrb\n");
 	return (reverse_rotate(stack_b));
 }
 
@@ -45,5 +47,6 @@ int	rrr(t_stack *stack_a, t_stack *stack_b)
 {
 	if (reverse_rotate(stack_a) == -1 || reverse_rotate(stack_b) == -1)
 		return (-1);
+	ft_printf("rrr\n");
 	return (0);
 }

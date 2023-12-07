@@ -6,13 +6,13 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:09:04 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 14:09:42 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 18:26:18 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	update_links(t_stack *dest, t_list_node *tmp)
+void	update_links(t_stack *dest, t_node *tmp)
 {
 	if (dest->top == NULL)
 	{
@@ -21,8 +21,8 @@ void	update_links(t_stack *dest, t_list_node *tmp)
 	}
 	else if (dest->bottom == dest->top)
 	{
-		dest->top->next = tmp;
-		dest->bottom = tmp;
+		dest->top = tmp;
+		dest->top->next = dest->bottom;
 		dest->bottom->previous = dest->top;
 	}
 	else
@@ -34,9 +34,9 @@ void	update_links(t_stack *dest, t_list_node *tmp)
 }
 
 /* (push) : Prend le premier élément de src et le met au debut de dest*/
-int	push(t_stack *dest, t_stack *src)
+int	push(t_stack *src, t_stack *dest)
 {
-	t_list_node	*tmp;
+	t_node	*tmp;
 
 	if (src == NULL || src->top == NULL)
 		return (-1);
@@ -52,10 +52,12 @@ int	push(t_stack *dest, t_stack *src)
 
 int	pa(t_stack *stack_a, t_stack *stack_b)
 {
+	ft_printf("pa\n");
 	return (push(stack_b, stack_a));
 }
 
 int	pb(t_stack *stack_a, t_stack *stack_b)
 {
+	ft_printf("pb\n");
 	return (push(stack_a, stack_b));
 }

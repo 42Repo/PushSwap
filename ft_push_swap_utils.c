@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:44 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 14:19:31 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 17:56:07 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	putstr_error(char *str)
 	return (-1);
 }
 
-t_list_node	*find_max(t_stack *stack)
+t_node	*find_max(t_stack *stack)
 {
-	t_list_node	*tmp;
-	t_list_node	*max;
+	t_node	*tmp;
+	t_node	*max;
 
 	tmp = stack->top;
 	max = tmp;
@@ -34,10 +34,10 @@ t_list_node	*find_max(t_stack *stack)
 	return (max);
 }
 
-t_list_node	*find_min(t_stack *stack)
+t_node	*find_min(t_stack *stack)
 {
-	t_list_node	*tmp;
-	t_list_node	*min;
+	t_node	*tmp;
+	t_node	*min;
 
 	tmp = stack->top;
 	min = tmp;

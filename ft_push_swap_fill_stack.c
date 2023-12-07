@@ -6,17 +6,17 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:28:19 by asuc              #+#    #+#             */
-/*   Updated: 2023/11/30 23:32:30 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 17:57:03 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-t_list_node	*create_new_node(int content)
+t_node	*create_new_node(int content)
 {
-	t_list_node	*new_node;
+	t_node	*new_node;
 
-	new_node = (t_list_node *)malloc(sizeof(t_list_node));
+	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;
@@ -25,7 +25,7 @@ t_list_node	*create_new_node(int content)
 	return (new_node);
 }
 
-void	push_to_stack(t_stack *stack, t_list_node *new_node)
+void	push_to_stack(t_stack *stack, t_node *new_node)
 {
 	if (!stack->top)
 	{
@@ -42,8 +42,8 @@ void	push_to_stack(t_stack *stack, t_list_node *new_node)
 
 void	clear_stack(t_stack *stack)
 {
-	t_list_node	*current;
-	t_list_node	*temp;
+	t_node	*current;
+	t_node	*temp;
 
 	if (!stack)
 		return ;
@@ -61,7 +61,7 @@ void	clear_stack(t_stack *stack)
 void	fill_stack_from_array(t_stack *stack, int *array, int size)
 {
 	int			i;
-	t_list_node	*new_node;
+	t_node		*new_node;
 
 	i = 0;
 	while (i < size)
@@ -72,7 +72,10 @@ void	fill_stack_from_array(t_stack *stack, int *array, int size)
 			clear_stack(stack);
 			return ;
 		}
+		new_node->rank = i;
 		push_to_stack(stack, new_node);
+		stack->range = i + 1;
+		stack->median = stack->range / 2;
 		i++;
 	}
 }

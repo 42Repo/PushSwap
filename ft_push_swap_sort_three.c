@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:15:24 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 14:39:42 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 17:56:07 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	sort_three(t_stack *stack_a)
 {
-	t_list_node	*max;
+	t_node	*max;
 
 	max = find_max(stack_a);
 	if (max == stack_a->top)

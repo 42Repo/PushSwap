@@ -6,7 +6,9 @@
     "algorithm": "c",
     "ft_printf.h": "c",
     "libft.h": "c",
-    "ft_push_swap.h": "c"
+    "ft_push_swap.h": "c",
+    "random": "c",
+    "limits": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

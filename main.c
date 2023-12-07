@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:26 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 14:45:54 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/07 18:51:04 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_stack(t_stack *stack)
 {
-	t_list_node	*tmp;
+	t_node	*tmp;
 
 	while (stack->top != NULL)
 	{
@@ -45,17 +45,21 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	// TEST
 	(void)argv;
-	char *fake_argv[] = {"624", "6546", "66", NULL};
+	char *fake_argv[] = {"624", "6546", "66", "65", "213", "45", "6", "634", "62444", "9", NULL};
 	// TEST
 	init_stack(&stack_a);
 	init_stack(&stack_b);
-	argc = 4; // TEST
+	argc = 11; // TEST
 	i = 0;
 	if (argc < 2)
 		return (0);
 	range = main_check_input_and_fill_tab(fake_argv, &tab);
 	if (range == -1)
 		return (-1);
+	stack_a.range = range;
+	stack_b.range = 0;
+	stack_a.median = stack_a.range / 2;
+	stack_b.median = stack_b.range / 2;
 	fill_stack_from_array(&stack_a, tab, range);
 	while (stack_is_sorted(&stack_a) == 0)
 	{
@@ -67,7 +71,7 @@ int	main(int argc, char **argv)
 			sort_stack(&stack_a, &stack_b, range);
 	}
 	// TEST
-	t_list_node *tmp = stack_a.top;
+	t_node *tmp = stack_a.top;
 	while (i < range)
 	{
 		ft_printf("%d\n", stack_a.top->content);
