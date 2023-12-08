@@ -14,7 +14,7 @@ BGreen	=	$(shell echo "\033[1;32m")
 RESET	=	$(shell echo "\033[0m")
 BRed	=	$(shell echo "\033[1;31m")
 NAME 	=	push_swap
-COMP 	=	clang
+COMP 	=	gcc
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	main.c\
@@ -40,7 +40,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@make --no-print-directory -C $(libft)
 	@cp $(libft)libft.a libft.a
-	@clang -gdwarf-4 -fPIE $(CFLAGS) -o $(NAME) $(OBJ) libft.a
+	@gcc -gdwarf-4 -fPIE $(CFLAGS) -o $(NAME) $(OBJ) libft.a
 	@echo "$(BGreen)Compilation OK$(RESET)"
 
 clean :

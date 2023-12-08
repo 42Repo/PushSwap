@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libft.a
-COMP = clang
+COMP = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 RESET	=	$(shell echo "\033[0m")
 BCyan	=	$(shell echo "\033[1;36m")
