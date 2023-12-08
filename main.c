@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:36:26 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/08 23:48:19 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/08 23:59:53 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int	main(int argc, char **argv)
 	//  argc = 11;
 	if (argc < 2)
 		return (0);
+	if (argc == 2)
+	{
+		argv = ft_split(argv[1], ' ');
+		range = argc - 1;
+	}
 	range = main_check_input_and_fill_tab(argv + 1, &tab);
 	if (range == -1)
 		return (-1);
