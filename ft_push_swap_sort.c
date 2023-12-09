@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/08 23:47:06 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/09 22:15:51 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ int	stack_is_sorted(t_stack *stack)
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+int	find_max_range(t_stack *stack_a, t_stack *stack_b)
+{
+	int	max;
+
+	if (stack_a->range > stack_b->range)
+		max = stack_a->range;
+	else
+		max = stack_b->range;
+	return (max);
 }
 
 t_node	*find_closer_min(int nb, t_stack *stack)
@@ -62,10 +73,11 @@ t_node	*find_closer_min(int nb, t_stack *stack)
 void	init_tab_instruction(enum e_instru ***tab, int range)
 {
 	(*tab) = malloc(3 * sizeof(enum e_instru *));
-	(*tab)[0] = ft_calloc(range * 10, sizeof(enum e_instru));
-	(*tab)[1] = ft_calloc(range * 10, sizeof(enum e_instru));
+	(*tab)[0] = ft_calloc(range * 100, sizeof(enum e_instru));
+	(*tab)[1] = ft_calloc(range * 100, sizeof(enum e_instru));
 	(*tab)[2] = NULL;
 }
+
 void set_tab_instruction(enum e_instru *tab, int range)
 {
 	int	i;
@@ -77,10 +89,6 @@ void set_tab_instruction(enum e_instru *tab, int range)
 		i++;
 	}
 }
-/* on calcule le nombre de coups min pour chaque nombre de stack_a pour mettre
-	le nombre de stack_a au top de stack_a + mettre le nombre target de
-	stack_a au top de stack_b
-*/
 
 // on optimise les coups en fonction des coups si on a rra et rrb on peut faire rrr et donc faires 1 moves au lieu de 2
 int optimize_moves(enum e_instru ***tab_instruction_tmp)
@@ -90,7 +98,7 @@ int optimize_moves(enum e_instru ***tab_instruction_tmp)
 
 	i = 0;
 	moves = 0;
-	while ((*tab_instruction_tmp)[0][i] != i_nothing ||(*tab_instruction_tmp)[1][i] != i_nothing)
+	while ((*tab_instruction_tmp)[0][i] != i_nothing || (*tab_instruction_tmp)[1][i] != i_nothing)
 	{
 		if ((*tab_instruction_tmp)[0][i] == i_ra && (*tab_instruction_tmp)[1][i] == i_rb)
 		{
@@ -126,17 +134,23 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	int					moves;
 	int					max_moves;
 	enum e_instru		**tab_instruction_tmp;
+	int					max;
+	int					moves_a;
+	int					moves_b;
 
-	init_tab_instruction(&tab_instruction_tmp, stack_a->range);
+	max = find_max_range(stack_a, stack_b);
+	init_tab_instruction(&tab_instruction_tmp, max);
 	tmp = stack_a->top;
 	target = NULL;
-	max_moves = stack_a->range * 4;
+	max_moves = stack_b->range * 4;
 	while (tmp != NULL)
 	{
 		moves = 0;
+		moves_b = 0;
+		moves_a = 0;
 		i = 0;
-		set_tab_instruction(tab_instruction_tmp[0], stack_a->range);
-		set_tab_instruction(tab_instruction_tmp[1], stack_a->range);
+		set_tab_instruction(tab_instruction_tmp[0], max);
+		set_tab_instruction(tab_instruction_tmp[1], max);
 		rank_tmp = tmp->rank;
 		while (rank_tmp != 0)
 		{
@@ -144,13 +158,13 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 			{
 				rank_tmp--;
 				tab_instruction_tmp[0][i] = i_ra;
-				moves++;
+				moves_a++;
 			}
 			else
 			{
 				rank_tmp++;
 				tab_instruction_tmp[0][i] = i_rra;
-				moves++;
+				moves_a++;
 			}
 			if (rank_tmp == stack_a->range)
 				rank_tmp = 0;
@@ -164,26 +178,37 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 			{
 				rank_tmp--;
 				tab_instruction_tmp[1][i] = i_rb;
-				moves++;
+				moves_b++;
 			}
 			else
 			{
 				rank_tmp++;
 				tab_instruction_tmp[1][i] = i_rrb;
-				moves++;
+				moves_b++;
 			}
 			if (rank_tmp == stack_b->range)
 				rank_tmp = 0;
 			i++;
 		}
 		i = 0;
+		// moves = moves_a + moves_b;
+		// if (stack_a->range >= stack_b->range)
+		// 	moves_a = ((float)moves_a) * 1.21 - moves_a;
+		// else
+		// 	moves_a = 0;
+		// if (stack_a->range < stack_b->range)
+		// 	moves_a = ((float)moves_a) * 1.21 - moves_a;
+		// else
+		// 	moves_a = 0;
 		moves = optimize_moves(&tab_instruction_tmp);
+		// moves = moves + moves_a + moves_b;
 		if (moves < max_moves)
 		{
 			max_moves = moves;
-			set_tab_instruction((*tab_instruction)[0], stack_a->range);
-			set_tab_instruction((*tab_instruction)[1], stack_a->range);
-			while (i < stack_a->range)
+			set_tab_instruction((*tab_instruction)[0], max);
+			set_tab_instruction((*tab_instruction)[1], max);
+
+			while (i < max)
 			{
 				(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];
 				(*tab_instruction)[1][i] = tab_instruction_tmp[1][i];
@@ -199,18 +224,12 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	return (target);
 }
 
-void	update_stack(t_stack *stk_a, int range_a, t_stack *stk_b, int range_b)
+void	update_stack(t_stack *stk_a, t_stack *stk_b)
 {
 	t_node	*tmp;
 	int		rank;
 
-	(void)range_b;
-	(void)range_a;
 	rank = 0;
-	// stk_a->range = range_a;
-	// stk_a->median = range_a / 2;
-	// stk_b->range = range_b;
-	// stk_b->median = range_b / 2;
 	tmp = stk_a->top;
 	while (tmp != NULL)
 	{
@@ -229,17 +248,19 @@ void	update_stack(t_stack *stk_a, int range_a, t_stack *stk_b, int range_b)
 		rank++;
 	}
 	stk_b->range = rank;
-	stk_a->median = stk_a->range / 2;
+	stk_b->median = stk_b->range / 2;
 }
 
 void	push_cheapeast(t_stack *stack_a, t_stack *stack_b, t_node *target,
 		enum e_instru **tab_instruction)
 {
 	int	i;
+	int	max;
 
 	(void)target;
 	i = 0;
-	while (i < stack_a->range)
+	max = find_max_range(stack_a, stack_b);
+	while (i < max)
 	{
 		if (tab_instruction[0][i] == i_ra)
 			ra(stack_a);
@@ -252,7 +273,7 @@ void	push_cheapeast(t_stack *stack_a, t_stack *stack_b, t_node *target,
 		i++;
 	}
 	i = 0;
-	while (i < stack_a->range)
+	while (i < max)
 	{
 		if (tab_instruction[1][i] == i_rb)
 			rb(stack_b);
@@ -268,7 +289,14 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b)
 	t_node			*tmp;
 	enum e_instru	**tab_instru;
 
-	init_tab_instruction(&tab_instru, stack_a->range);
+	if (stack_a->range > stack_b->range)
+	{
+		init_tab_instruction(&tab_instru, stack_a->range);
+	}
+	else
+	{
+		init_tab_instruction(&tab_instru, stack_b->range);
+	}
 	tmp = stack_a->top;
 	while (stack_a->top != NULL)
 	{
@@ -327,17 +355,19 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 	int					moves;
 	int					max_moves;
 	enum e_instru		**tab_instruction_tmp;
+	int					max;
 
-	init_tab_instruction(&tab_instruction_tmp, stack_b->range);
+	max = find_max_range(stack_a, stack_b);
+	init_tab_instruction(&tab_instruction_tmp, max);
 	tmp = stack_b->top;
 	target = NULL;
-	max_moves = stack_b->range * 4;
+	max_moves = max * 4;
 	while (tmp != NULL)
 	{
 		moves = 0;
 		i = 0;
-		set_tab_instruction(tab_instruction_tmp[0], stack_b->range);
-		set_tab_instruction(tab_instruction_tmp[1], stack_b->range);
+		set_tab_instruction(tab_instruction_tmp[0], max);
+		set_tab_instruction(tab_instruction_tmp[1], max);
 		rank_tmp = tmp->rank;
 		while (rank_tmp != 0)
 		{
@@ -382,9 +412,9 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 		if (moves < max_moves)
 		{
 			max_moves = moves;
-			set_tab_instruction((*tab_instruction)[0], stack_b->range);
-			set_tab_instruction((*tab_instruction)[1], stack_b->range);
-			while (i < (stack_b->range * 4))
+			set_tab_instruction((*tab_instruction)[0], max);
+			set_tab_instruction((*tab_instruction)[1], max);
+			while (i < max)
 			{
 				(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];
 				(*tab_instruction)[1][i] = tab_instruction_tmp[1][i];
@@ -392,6 +422,8 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 			}
 			target = tmp;
 		}
+		if (max_moves == 0)
+			break ;
 		tmp = tmp->next;
 	}
 	free(tab_instruction_tmp[1]);
@@ -432,7 +464,14 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	t_node			*tmp;
 	enum e_instru	**tab_instru;
 
-	init_tab_instruction(&tab_instru, stack_a->range);
+	if (stack_a->range > stack_b->range)
+	{
+		init_tab_instruction(&tab_instru, stack_a->range);
+	}
+	else
+	{
+		init_tab_instruction(&tab_instru, stack_b->range);
+	}
 	tmp = stack_b->top;
 	while (stack_b->top != NULL)
 	{
@@ -454,7 +493,7 @@ void final_rotate(t_stack *stack_a)
 	tmp = find_min(stack_a);
 	while (stack_is_sorted(stack_a) == 0)
 	{
-		if (tmp->content < stack_a->median)
+		if (tmp->rank < stack_a->median)
 			ra(stack_a);
 		else
 			rra(stack_a);
@@ -467,24 +506,24 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
 		pb(stack_a, stack_b);
-		update_stack(stack_a, stack_a->range - 1, stack_b, stack_b->range + 1);
+		update_stack(stack_a, stack_b);
 	}
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
 		pb(stack_a, stack_b);
-		update_stack(stack_a, stack_a->range - 1, stack_b, stack_b->range + 1);
+		update_stack(stack_a, stack_b);
 	}
 	while (stack_a->range > 3)
 	{
 		push_cheapeast_number_to_b(stack_a, stack_b);
-		update_stack(stack_a, stack_a->range - 1, stack_b, stack_b->range + 1);
+		update_stack(stack_a, stack_b);
 	}
 	sort_three(stack_a);
-	update_stack(stack_a, stack_a->range, stack_b, stack_b->range);
+	update_stack(stack_a, stack_b);
 	while (stack_b->range > 0)
 	{
 		push_cheapeast_number_to_a(stack_a, stack_b);
-		update_stack(stack_a, stack_a->range + 1, stack_b, stack_b->range - 1);
+		update_stack(stack_a, stack_b);
 	}
 	final_rotate(stack_a);
 	return (0);

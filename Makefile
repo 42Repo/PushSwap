@@ -14,7 +14,7 @@ BGreen	=	$(shell echo "\033[1;32m")
 RESET	=	$(shell echo "\033[0m")
 BRed	=	$(shell echo "\033[1;31m")
 NAME 	=	push_swap
-COMP 	=	gcc
+COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	main.c\
@@ -35,7 +35,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	@$(COMP) -gdwarf-4 -fPIE $(CFLAGS) -o $@ -c $<
+	@$(COMP) -gdwarf-4 -fPIE -O3 -march=native $(CFLAGS) -o $@ -c $<
 
 $(NAME) : $(OBJ)
 	@make --no-print-directory -C $(libft)
@@ -56,7 +56,7 @@ fclean : clean
 re : fclean all
 
 test : all
-	clear && make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -s ./push_swap  132132 321 4654 654 456
+	clear && make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -s ./push_swap2 "367 47 128 400 256 485 296 376 492 439 13 201 386 177 369 430 15 66 465 46 6 4 45"
 
 .PHONY: all fclean clean re
 

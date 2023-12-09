@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 NAME = libft.a
-COMP = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+COMP = clang
+CFLAGS = -Wall -Werror -Wextra
 RESET	=	$(shell echo "\033[0m")
 BCyan	=	$(shell echo "\033[1;36m")
 
@@ -73,7 +73,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	@$(COMP) -gdwarf-4 -fPIE $(CFLAGS) -o $@ -c $<
+	@$(COMP) -gdwarf-4 -fPIE -O3 -march=native $(CFLAGS) -o $@ -c $<
 
 $(NAME) : $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)
@@ -82,7 +82,7 @@ clean :
 	@rm -f $(OBJ)
 
 so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
+	$(CC) -nostartfiles -fPIC  $(CFLAGS) $(SRC)
 	gcc -nostartfiles -shared -o libft.so $(OBJ)
 
 fclean : clean

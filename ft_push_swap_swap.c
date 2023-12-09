@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:06:25 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/04 15:02:51 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/09 14:41:07 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ int	swap(t_stack *stack)
 /* (swap ss) : sa et sb en même temps.*/
 int	ss(t_stack *stack_a, t_stack *stack_b)
 {
-	if (sa(stack_a) == -1 || sb(stack_b) == -1)
+	ft_printf("ss\n");
+	if (swap(stack_a) == -1 || swap(stack_b) == -1)
 		return (-1);
 	return (0);
 }
 
 int	sa(t_stack *stack_a)
 {
+	ft_printf("sa\n");
 	return (swap(stack_a));
 }
 
 int	sb(t_stack *stack_b)
 {
+	ft_printf("sb\n");
 	return (swap(stack_b));
 }
