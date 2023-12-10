@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/10 01:02:02 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/10 02:12:48 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -501,10 +501,52 @@ void final_rotate(t_stack *stack_a)
 			rra(stack_a);
 	}
 }
+// on malloc un tableau de la taille de stack de a et on y met la plus grande sequence croissante
+int *longest_sequence(t_stack *stack_a)
+{
+	int		i;
+	int		*tab;
+	int		len;
+	int		max_len;
+	t_node	*tmp;
+	t_node	*tmp2;
+
+	len = 0;
+	i = 0;
+	max_len = 0;
+	tmp = stack_a->top;
+	tab = malloc(stack_a->range * sizeof(int));
+	while (tmp != NULL)
+	{
+		tmp2 = tmp;
+		while (tmp2->next != NULL)
+		{
+			if (tmp->content < tmp2->next->content)
+			{
+				len++;
+				tmp = tmp2->next;
+			}
+			tmp2 = tmp2->next;
+		}
+		if (len > max_len)
+		{
+			max_len = len;
+			tab[0] = tmp->content;
+		}
+		len = 0;
+		tmp = tmp->next;
+	}
+	tmp = stack_a->top;
+	while (tmp->content != tab[0])
+		tmp = tmp->next;
+
+	return (tab);
+}
 
 int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 {
 	(void)range;
+	int *tab;
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
 		pb(stack_a, stack_b);
@@ -517,8 +559,10 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 	}
 	while (stack_a->range > 3)
 	{
+		tab = longest_sequence(stack_a);
+		ft_printf("tab[0] = %d\n", tab[0]);
+		return (0);
 		push_cheapeast_number_to_b(stack_a, stack_b);
-		// ft_printf("stack_b->top->content = %d\n", stack_b->top->content);
 		update_stack(stack_a, stack_b);
 	}
 	sort_three(stack_a);

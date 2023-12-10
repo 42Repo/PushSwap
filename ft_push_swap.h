@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/09 22:24:33 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/10 01:34:36 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_stack
 {
 	int			range;
 	int			median;
+	int			*tab;
 	t_node		*top;
 	t_node		*bottom;
 }	t_stack;
