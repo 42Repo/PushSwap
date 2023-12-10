@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/09 22:15:51 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/10 01:02:02 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,43 +152,43 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 		set_tab_instruction(tab_instruction_tmp[0], max);
 		set_tab_instruction(tab_instruction_tmp[1], max);
 		rank_tmp = tmp->rank;
-		while (rank_tmp != 0)
+		if (rank_tmp <= stack_a->median)
 		{
-			if (rank_tmp <= stack_a->median)
+			while (i < tmp->rank)
 			{
-				rank_tmp--;
 				tab_instruction_tmp[0][i] = i_ra;
-				moves_a++;
+				i++;
 			}
-			else
+			moves_a = i;
+		}
+		else
+		{
+			while (i <= (stack_a->range - tmp->rank) - 1)
 			{
-				rank_tmp++;
 				tab_instruction_tmp[0][i] = i_rra;
-				moves_a++;
+				i++;
 			}
-			if (rank_tmp == stack_a->range)
-				rank_tmp = 0;
-			i++;
+			moves_a = i;
 		}
 		rank_tmp = tmp->target->rank;
 		i = 0;
-		while (rank_tmp != 0)
+		if (rank_tmp <= stack_b->median)
 		{
-			if (rank_tmp <= stack_b->median)
+			while (i < tmp->target->rank)
 			{
-				rank_tmp--;
 				tab_instruction_tmp[1][i] = i_rb;
-				moves_b++;
+				i++;
 			}
-			else
+			moves_b = i;
+		}
+		else
+		{
+			while (i <= (stack_b->range - tmp->target->rank) - 1)
 			{
-				rank_tmp++;
 				tab_instruction_tmp[1][i] = i_rrb;
-				moves_b++;
+				i++;
 			}
-			if (rank_tmp == stack_b->range)
-				rank_tmp = 0;
-			i++;
+			moves_b = i;
 		}
 		i = 0;
 		// moves = moves_a + moves_b;
@@ -216,6 +216,8 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 			}
 			target = tmp;
 		}
+		if (max_moves <= 1)
+			break ;
 		tmp = tmp->next;
 	}
 	free(tab_instruction_tmp[1]);
@@ -516,6 +518,7 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 	while (stack_a->range > 3)
 	{
 		push_cheapeast_number_to_b(stack_a, stack_b);
+		// ft_printf("stack_b->top->content = %d\n", stack_b->top->content);
 		update_stack(stack_a, stack_b);
 	}
 	sort_three(stack_a);
