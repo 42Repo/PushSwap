@@ -56,7 +56,7 @@ fclean : clean
 re : fclean all
 
 test : all
-	clear && make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -s ./push_swap2 "367 47 128 400 256 485 296 376 492 439 13 201 386 177 369 430 15 66 465 46 6 4 45"
+	clear && make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -s ./push_swap "367 47 128 400 256 485 296 376 492 439 13 201 386 177 369 430 15 66 465 46 6 4 45"
 
 .PHONY: all fclean clean re
 

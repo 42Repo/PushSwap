@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/10 02:12:48 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/10 23:38:56 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	stack_is_sorted(t_stack *stack)
 {
 	t_node	*tmp;
 
+	if (stack->top == NULL)
+		return (-1);
 	tmp = stack->top;
 	while (tmp->next != NULL)
 	{
@@ -24,6 +26,20 @@ int	stack_is_sorted(t_stack *stack)
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+void	final_rotate(t_stack *stack_a)
+{
+	t_node	*tmp;
+
+	tmp = find_min(stack_a);
+	while (stack_is_sorted(stack_a) == 0)
+	{
+		if (tmp->rank < stack_a->median)
+			ra(stack_a);
+		else
+			rra(stack_a);
+	}
 }
 
 int	find_max_range(t_stack *stack_a, t_stack *stack_b)
@@ -124,8 +140,22 @@ int optimize_moves(enum e_instru ***tab_instruction_tmp)
 	return (moves);
 }
 
+int	is_in_tab(int *tab, int nb)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i] != -1)
+	{
+		if (tab[i] == nb)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
-		enum e_instru ***tab_instruction)
+		enum e_instru ***tab_instruction, int *tab)
 {
 	t_node				*tmp;
 	t_node				*target;
@@ -202,7 +232,7 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 		// 	moves_a = 0;
 		moves = optimize_moves(&tab_instruction_tmp);
 		// moves = moves + moves_a + moves_b;
-		if (moves < max_moves)
+		if (moves < max_moves && is_in_tab(tab, tmp->content) == 0)
 		{
 			max_moves = moves;
 			set_tab_instruction((*tab_instruction)[0], max);
@@ -286,7 +316,7 @@ void	push_cheapeast(t_stack *stack_a, t_stack *stack_b, t_node *target,
 	pb(stack_a, stack_b);
 }
 
-int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b)
+int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 {
 	t_node			*tmp;
 	enum e_instru	**tab_instru;
@@ -306,7 +336,12 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b)
 		stack_a->top = stack_a->top->next;
 	}
 	stack_a->top = tmp;
-	tmp = min_lenght(stack_a, stack_b, &tab_instru);
+	tmp = min_lenght(stack_a, stack_b, &tab_instru, tab);
+	if (tmp == NULL)
+	{
+		final_rotate(stack_a);
+		return (0);
+	}
 	push_cheapeast(stack_a, stack_b, tmp, tab_instru);
 	free(tab_instru[1]);
 	free(tab_instru[0]);
@@ -488,19 +523,7 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	free(tab_instru);
 }
 
-void final_rotate(t_stack *stack_a)
-{
-	t_node	*tmp;
 
-	tmp = find_min(stack_a);
-	while (stack_is_sorted(stack_a) == 0)
-	{
-		if (tmp->rank < stack_a->median)
-			ra(stack_a);
-		else
-			rra(stack_a);
-	}
-}
 // on malloc un tableau de la taille de stack de a et on y met la plus grande sequence croissante
 int *longest_sequence(t_stack *stack_a)
 {
@@ -510,21 +533,23 @@ int *longest_sequence(t_stack *stack_a)
 	int		max_len;
 	t_node	*tmp;
 	t_node	*tmp2;
+	int		nb;
 
-	len = 0;
+	len = 1;
 	i = 0;
 	max_len = 0;
 	tmp = stack_a->top;
-	tab = malloc(stack_a->range * sizeof(int));
+	tab = malloc((stack_a->range + 1) * sizeof(int));
 	while (tmp != NULL)
 	{
 		tmp2 = tmp;
-		while (tmp2->next != NULL)
+		nb = tmp->content;
+		while (tmp2 != NULL)
 		{
-			if (tmp->content < tmp2->next->content)
+			if (nb < tmp2->content)
 			{
 				len++;
-				tmp = tmp2->next;
+				nb = tmp2->content;
 			}
 			tmp2 = tmp2->next;
 		}
@@ -533,13 +558,25 @@ int *longest_sequence(t_stack *stack_a)
 			max_len = len;
 			tab[0] = tmp->content;
 		}
-		len = 0;
+		len = 1;
 		tmp = tmp->next;
 	}
 	tmp = stack_a->top;
 	while (tmp->content != tab[0])
 		tmp = tmp->next;
-
+	nb = tmp->content;
+	i = 1;
+	while (tmp != NULL)
+	{
+		if (nb < tmp->content)
+		{
+			tab[i] = tmp->content;
+			i++;
+			nb = tmp->content;
+		}
+		tmp = tmp->next;
+	}
+	tab[i] = -1;
 	return (tab);
 }
 
@@ -557,15 +594,15 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 		pb(stack_a, stack_b);
 		update_stack(stack_a, stack_b);
 	}
-	while (stack_a->range > 3)
+	tab = longest_sequence(stack_a);
+	while (stack_a->range > 3 && stack_is_sorted(stack_a) == 0)
 	{
-		tab = longest_sequence(stack_a);
-		ft_printf("tab[0] = %d\n", tab[0]);
-		return (0);
-		push_cheapeast_number_to_b(stack_a, stack_b);
+		push_cheapeast_number_to_b(stack_a, stack_b, tab);
 		update_stack(stack_a, stack_b);
 	}
-	sort_three(stack_a);
+	if (stack_is_sorted(stack_a) == 0)
+		sort_three(stack_a);
+	free(tab);
 	update_stack(stack_a, stack_b);
 	while (stack_b->range > 0)
 	{
