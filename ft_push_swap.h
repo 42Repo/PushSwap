@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/10 01:34:36 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/16 22:11:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PUSH_SWAP_H
 
 # include "Libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_node
 {
@@ -80,5 +81,6 @@ int				rra(t_stack *stack_a);
 int				rrb(t_stack *stack_b);
 int				pb(t_stack *stack_a, t_stack *stack_b);
 int				pa(t_stack *stack_a, t_stack *stack_b);
+int				*find_lis(int *arr, int n);
 
 #endif

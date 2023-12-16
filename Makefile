@@ -27,7 +27,8 @@ SRC		=	main.c\
 			ft_push_swap_reverse_rotate.c\
 			ft_push_swap_rotate.c\
 			ft_push_swap_swap.c\
-			ft_push_swap_sort_three.c
+			ft_push_swap_sort_three.c\
+			ft_push_swap_lis.c
 
 
 OBJ = $(SRC:.c=.o)
