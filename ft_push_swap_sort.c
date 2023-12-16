@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/10 23:38:56 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/16 22:24:18 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	int					max_moves;
 	enum e_instru		**tab_instruction_tmp;
 	int					max;
-	int					moves_a;
-	int					moves_b;
 
 	max = find_max_range(stack_a, stack_b);
 	init_tab_instruction(&tab_instruction_tmp, max);
@@ -176,8 +174,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	while (tmp != NULL)
 	{
 		moves = 0;
-		moves_b = 0;
-		moves_a = 0;
 		i = 0;
 		set_tab_instruction(tab_instruction_tmp[0], max);
 		set_tab_instruction(tab_instruction_tmp[1], max);
@@ -189,7 +185,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 				tab_instruction_tmp[0][i] = i_ra;
 				i++;
 			}
-			moves_a = i;
 		}
 		else
 		{
@@ -198,7 +193,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 				tab_instruction_tmp[0][i] = i_rra;
 				i++;
 			}
-			moves_a = i;
 		}
 		rank_tmp = tmp->target->rank;
 		i = 0;
@@ -209,7 +203,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 				tab_instruction_tmp[1][i] = i_rb;
 				i++;
 			}
-			moves_b = i;
 		}
 		else
 		{
@@ -218,7 +211,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 				tab_instruction_tmp[1][i] = i_rrb;
 				i++;
 			}
-			moves_b = i;
 		}
 		i = 0;
 		// moves = moves_a + moves_b;
