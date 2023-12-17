@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 08:05:13 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 08:27:09 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_stack(t_stack *stack)
 
 void	free_stack_final(t_stack *stack_a, t_stack *stack_b, int **tab)
 {
+	free(stack_a->moves);
 	free_tab(tab);
 	free_stack(stack_a);
 	free_stack(stack_b);
@@ -131,6 +132,7 @@ int	main2(int argc, char **argv, int print)
 			sort_stack(&stack_a, &stack_b, range, lis_array);
 		}
 	}
+	free(lis_array);
 	if (argc == 2)
 		free_argv(&argv);
 	i = 0;
@@ -192,6 +194,7 @@ int	main3(int argc, char **argv, int print)
 			sort_stack(&stack_a, &stack_b, range, lis_array);
 		}
 	}
+	free(lis_array);
 	if (argc == 2)
 		free_argv(&argv);
 	i = 0;

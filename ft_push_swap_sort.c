@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 07:57:51 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 08:26:20 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,9 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 	if (tmp == NULL)
 	{
 		final_rotate(stack_a);
+		free(tab_instru[1]);
+		free(tab_instru[0]);
+		free(tab_instru);
 		return (0);
 	}
 	push_cheapeast(stack_a, stack_b, tab_instru);
@@ -527,7 +530,6 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range, int *tab_lis)
 	}
 	if (stack_is_sorted(stack_a) == 0)
 		sort_three(stack_a);
-	free(tab_lis);
 	update_stack(stack_a, stack_b);
 	while (stack_b->range > 0)
 	{

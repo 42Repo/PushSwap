@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 07:34:36 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 08:12:10 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 08:23:37 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	*find_lis(t_stack *t_stack, int *arr, int n)
 	int			max_lis;
 	int			max_idx;
 	t_lis_data	*lis_data;
+	int			*result;
 
 	lis_data = (t_lis_data *)malloc(sizeof(t_lis_data));
 	if (!lis_data)
@@ -105,6 +106,7 @@ int	*find_lis(t_stack *t_stack, int *arr, int n)
 	t_stack->size_lis = max_lis;
 	free(lis);
 	free(lis_data->prev);
+	result = lis_data->result;
 	free(lis_data);
-	return (lis_data->result);
+	return (result);
 }
