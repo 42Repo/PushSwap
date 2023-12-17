@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 02:46:33 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 04:30:56 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	init_tab_instruction(enum e_instru ***tab, int range)
 	(*tab)[2] = NULL;
 }
 
-void set_tab_instruction(enum e_instru *tab, int range)
+void	set_tab_instruction(enum e_instru *tab, int range)
 {
 	int	i;
 
@@ -107,22 +107,25 @@ void set_tab_instruction(enum e_instru *tab, int range)
 }
 
 // on optimise les coups en fonction des coups si on a rra et rrb on peut faire rrr et donc faires 1 moves au lieu de 2
-int optimize_moves(enum e_instru ***tab_instruction_tmp)
+int	optimize_moves(enum e_instru ***tab_instruction_tmp)
 {
 	int	i;
 	int	moves;
 
 	i = 0;
 	moves = 0;
-	while ((*tab_instruction_tmp)[0][i] != i_nothing || (*tab_instruction_tmp)[1][i] != i_nothing)
+	while ((*tab_instruction_tmp)[0][i] != i_nothing
+		|| (*tab_instruction_tmp)[1][i] != i_nothing)
 	{
-		if ((*tab_instruction_tmp)[0][i] == i_ra && (*tab_instruction_tmp)[1][i] == i_rb)
+		if ((*tab_instruction_tmp)[0][i] == i_ra
+			&& (*tab_instruction_tmp)[1][i] == i_rb)
 		{
 			((*tab_instruction_tmp)[0][i] = i_rr);
 			((*tab_instruction_tmp)[1][i] = i_nothing);
 			moves++;
 		}
-		else if ((*tab_instruction_tmp)[0][i] == i_rra && (*tab_instruction_tmp)[1][i] == i_rrb)
+		else if ((*tab_instruction_tmp)[0][i] == i_rra
+			&& (*tab_instruction_tmp)[1][i] == i_rrb)
 		{
 			((*tab_instruction_tmp)[0][i] = i_rrr);
 			((*tab_instruction_tmp)[1][i] = i_nothing);
@@ -157,14 +160,14 @@ int	is_in_tab(int *tab, int nb, int size)
 t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 		enum e_instru ***tab_instruction, int *tab)
 {
-	t_node				*tmp;
-	t_node				*target;
-	int					i;
-	int					rank_tmp;
-	int					moves;
-	int					max_moves;
-	enum e_instru		**tab_instruction_tmp;
-	int					max;
+	t_node			*tmp;
+	t_node			*target;
+	int				i;
+	int				rank_tmp;
+	int				moves;
+	int				max_moves;
+	enum e_instru	**tab_instruction_tmp;
+	int				max;
 
 	max = find_max_range(stack_a, stack_b);
 	init_tab_instruction(&tab_instruction_tmp, max);
@@ -214,12 +217,12 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 		}
 		i = 0;
 		moves = optimize_moves(&tab_instruction_tmp);
-		if (moves < max_moves && is_in_tab(tab, tmp->content, stack_a->size_lis) == 0)
+		if (moves < max_moves && is_in_tab(tab, tmp->content,
+				stack_a->size_lis) == 0)
 		{
 			max_moves = moves;
 			set_tab_instruction((*tab_instruction)[0], max);
 			set_tab_instruction((*tab_instruction)[1], max);
-
 			while (i < max)
 			{
 				(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];
@@ -331,7 +334,7 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 	return (0);
 }
 
-t_node	*find_closer_to_sup(int nb ,t_stack *stack)
+t_node	*find_closer_to_sup(int nb, t_stack *stack)
 {
 	t_node	*tmp;
 	t_node	*target;
@@ -367,14 +370,14 @@ t_node	*find_closer_to_sup(int nb ,t_stack *stack)
 t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 		enum e_instru ***tab_instruction)
 {
-	t_node				*tmp;
-	t_node				*target;
-	int					i;
-	int					rank_tmp;
-	int					moves;
-	int					max_moves;
-	enum e_instru		**tab_instruction_tmp;
-	int					max;
+	t_node			*tmp;
+	t_node			*target;
+	int				i;
+	int				rank_tmp;
+	int				moves;
+	int				max_moves;
+	enum e_instru	**tab_instruction_tmp;
+	int				max;
 
 	max = find_max_range(stack_a, stack_b);
 	init_tab_instruction(&tab_instruction_tmp, max);
@@ -494,7 +497,8 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	tmp = stack_b->top;
 	while (stack_b->top != NULL)
 	{
-		stack_b->top->target = find_closer_to_sup(stack_b->top->content, stack_a);
+		stack_b->top->target = find_closer_to_sup(stack_b->top->content,
+				stack_a);
 		stack_b->top = stack_b->top->next;
 	}
 	stack_b->top = tmp;
