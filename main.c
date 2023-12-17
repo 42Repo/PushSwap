@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 22:17:47 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 01:00:30 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	main(int argc, char **argv)
 	int		*tab;
 	t_stack	stack_a;
 	t_stack	stack_b;
+	int		*lis_array;
+	int		n;
 
 	init_stack(&stack_a);
 	init_stack(&stack_b);
@@ -91,14 +93,8 @@ int	main(int argc, char **argv)
 	stack_b.median = stack_b.range / 2;
 	stack_a.tab = NULL;
 	stack_b.tab = NULL;
-	int n = argc - 1;
-	int *lis_array = find_lis(tab, n);
-	int i = 0;
-	while (i < n) {
-		printf("%d ", lis_array[i]);
-		i++;
-	}
-	return (0);
+	n = range;
+	lis_array = find_lis(&stack_a, tab, n);
 	fill_stack_from_array(&stack_a, tab, range);
 	while (stack_is_sorted(&stack_a) == 0)
 	{
@@ -108,8 +104,9 @@ int	main(int argc, char **argv)
 			sort_three(&stack_a);
 		else
 		{
-			sort_stack(&stack_a, &stack_b, range);
+			sort_stack(&stack_a, &stack_b, range, lis_array);
 		}
+		return (0);
 	}
 	if (argc == 2)
 		free_argv(&argv);

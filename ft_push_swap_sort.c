@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 22:24:18 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/16 23:25:43 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,12 +140,12 @@ int optimize_moves(enum e_instru ***tab_instruction_tmp)
 	return (moves);
 }
 
-int	is_in_tab(int *tab, int nb)
+int	is_in_tab(int *tab, int nb, int size)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i] != -1)
+	while (i < size)
 	{
 		if (tab[i] == nb)
 			return (1);
@@ -213,18 +213,8 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 			}
 		}
 		i = 0;
-		// moves = moves_a + moves_b;
-		// if (stack_a->range >= stack_b->range)
-		// 	moves_a = ((float)moves_a) * 1.21 - moves_a;
-		// else
-		// 	moves_a = 0;
-		// if (stack_a->range < stack_b->range)
-		// 	moves_a = ((float)moves_a) * 1.21 - moves_a;
-		// else
-		// 	moves_a = 0;
 		moves = optimize_moves(&tab_instruction_tmp);
-		// moves = moves + moves_a + moves_b;
-		if (moves < max_moves && is_in_tab(tab, tmp->content) == 0)
+		if (moves < max_moves && is_in_tab(tab, tmp->content, stack_a->size_lis) == 0)
 		{
 			max_moves = moves;
 			set_tab_instruction((*tab_instruction)[0], max);
@@ -515,67 +505,9 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	free(tab_instru);
 }
 
-
-// on malloc un tableau de la taille de stack de a et on y met la plus grande sequence croissante
-int *longest_sequence(t_stack *stack_a)
-{
-	int		i;
-	int		*tab;
-	int		len;
-	int		max_len;
-	t_node	*tmp;
-	t_node	*tmp2;
-	int		nb;
-
-	len = 1;
-	i = 0;
-	max_len = 0;
-	tmp = stack_a->top;
-	tab = malloc((stack_a->range + 1) * sizeof(int));
-	while (tmp != NULL)
-	{
-		tmp2 = tmp;
-		nb = tmp->content;
-		while (tmp2 != NULL)
-		{
-			if (nb < tmp2->content)
-			{
-				len++;
-				nb = tmp2->content;
-			}
-			tmp2 = tmp2->next;
-		}
-		if (len > max_len)
-		{
-			max_len = len;
-			tab[0] = tmp->content;
-		}
-		len = 1;
-		tmp = tmp->next;
-	}
-	tmp = stack_a->top;
-	while (tmp->content != tab[0])
-		tmp = tmp->next;
-	nb = tmp->content;
-	i = 1;
-	while (tmp != NULL)
-	{
-		if (nb < tmp->content)
-		{
-			tab[i] = tmp->content;
-			i++;
-			nb = tmp->content;
-		}
-		tmp = tmp->next;
-	}
-	tab[i] = -1;
-	return (tab);
-}
-
-int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
+int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range, int *tab_lis)
 {
 	(void)range;
-	int *tab;
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
 		pb(stack_a, stack_b);
@@ -586,15 +518,14 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range)
 		pb(stack_a, stack_b);
 		update_stack(stack_a, stack_b);
 	}
-	tab = longest_sequence(stack_a);
 	while (stack_a->range > 3 && stack_is_sorted(stack_a) == 0)
 	{
-		push_cheapeast_number_to_b(stack_a, stack_b, tab);
+		push_cheapeast_number_to_b(stack_a, stack_b, tab_lis);
 		update_stack(stack_a, stack_b);
 	}
 	if (stack_is_sorted(stack_a) == 0)
 		sort_three(stack_a);
-	free(tab);
+	free(tab_lis);
 	update_stack(stack_a, stack_b);
 	while (stack_b->range > 0)
 	{

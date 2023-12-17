@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 22:11:55 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/16 23:21:04 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_node
 
 typedef struct s_stack
 {
+	int			size_lis;
 	int			range;
 	int			median;
 	int			*tab;
@@ -61,7 +62,7 @@ void			clear_stack(t_stack *stack);
 void			push_to_stack(t_stack *stack, t_node *new_node);
 t_node			*create_new_node(int content);
 int				stack_is_sorted(t_stack *stack);
-int				sort_stack(t_stack *stack_a, t_stack *stack_b, int range);
+int				sort_stack(t_stack *stack_a, t_stack *stack_b, int range, int *tab_lis);
 int				rotate(t_stack *stack);
 int				push(t_stack *dest, t_stack *src);
 void			update_links(t_stack *dest, t_node *tmp);
@@ -81,6 +82,6 @@ int				rra(t_stack *stack_a);
 int				rrb(t_stack *stack_b);
 int				pb(t_stack *stack_a, t_stack *stack_b);
 int				pa(t_stack *stack_a, t_stack *stack_b);
-int				*find_lis(int *arr, int n);
+int				*find_lis(t_stack *t_stack, int *arr, int n);
 
 #endif

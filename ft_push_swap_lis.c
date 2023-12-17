@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:46:56 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 22:32:30 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/16 23:32:12 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	construct_lis(int *arr, int *prev, int *result, int idx, int size,
 	(*pos)++;
 }
 
-int	*find_lis(int *arr, int n)
+int	*find_lis(t_stack *t_stack, int *arr, int n)
 {
 	int	*lis;
 	int	*prev;
@@ -87,10 +87,11 @@ int	*find_lis(int *arr, int n)
 		}
 		i++;
 	}
-	result = (int *)malloc(max_lis * sizeof(int));
+	result = (int *)ft_calloc(max_lis, sizeof(int));
 	if (!result)
 		return (NULL);
 	construct_lis(arr, prev, result, max_idx, max_lis, &pos);
+	t_stack->size_lis = max_lis;
 	free(lis);
 	free(prev);
 	return (result);
