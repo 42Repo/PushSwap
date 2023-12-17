@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 23:21:04 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 02:44:25 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	int			size_lis;
-	int			range;
-	int			median;
-	int			*tab;
-	t_node		*top;
-	t_node		*bottom;
+	int				size_lis;
+	int				range;
+	int				median;
+	t_node			*top;
+	t_node			*bottom;
+	enum e_instru	*moves;
+	int				nb_moves;
 }	t_stack;
 
 enum e_instru
@@ -75,11 +76,11 @@ t_node			*find_max(t_stack *stack);
 t_node			*find_min(t_stack *stack);
 int				sort_three(t_stack *stack_a);
 int				ra(t_stack *stack_a);
-int				rb(t_stack *stack_b);
+int				rb(t_stack *stack_b, t_stack *stack_a);
 int				sa(t_stack *stack_a);
-int				sb(t_stack *stack_b);
+int				sb(t_stack *stack_b, t_stack *stack_a);
 int				rra(t_stack *stack_a);
-int				rrb(t_stack *stack_b);
+int				rrb(t_stack *stack_b, t_stack *stack_a);
 int				pb(t_stack *stack_a, t_stack *stack_b);
 int				pa(t_stack *stack_a, t_stack *stack_b);
 int				*find_lis(t_stack *t_stack, int *arr, int n);

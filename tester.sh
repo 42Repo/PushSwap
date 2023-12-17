@@ -9,12 +9,12 @@ do
     then
         i=$((i+1))
         # on affiche l'input qui a fait depasser le nombre de coups
-        if [ $k -gt $max ]
-        then
-            max=$k
-            echo $sh
-            echo $k
-        fi
+        # if [ $k -gt $max ]
+        # then
+        max=$k
+        echo $sh
+        echo $k
+        # fi
     fi
 done
 echo $i

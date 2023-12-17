@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 23:25:43 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 02:46:33 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,9 +290,9 @@ void	push_cheapeast(t_stack *stack_a, t_stack *stack_b, t_node *target,
 	while (i < max)
 	{
 		if (tab_instruction[1][i] == i_rb)
-			rb(stack_b);
+			rb(stack_b, stack_a);
 		else if (tab_instruction[1][i] == i_rrb)
-			rrb(stack_b);
+			rrb(stack_b, stack_a);
 		i++;
 	}
 	pb(stack_a, stack_b);
@@ -461,9 +461,9 @@ void	push_cheapeast_a(t_stack *stack_b, t_stack *stack_a, t_node *target,
 	while (i < (stack_a->range))
 	{
 		if (tab_instruction[0][i] == i_rb)
-			rb(stack_b);
+			rb(stack_b, stack_a);
 		else if (tab_instruction[0][i] == i_rrb)
-			rrb(stack_b);
+			rrb(stack_b, stack_a);
 		i++;
 	}
 	i = 0;

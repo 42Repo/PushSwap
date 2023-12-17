@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:09:04 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/08 20:59:51 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 02:39:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ int	push(t_stack *src, t_stack *dest)
 
 int	pa(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_printf("pa\n");
+	// ft_printf("pa\n");
+	stack_a->moves[stack_a->nb_moves] = i_pa;
+	stack_a->nb_moves++;
 	return (push(stack_b, stack_a));
 }
 
 int	pb(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_printf("pb\n");
+	// ft_printf("pb\n");
+	stack_a->moves[stack_a->nb_moves] = i_pb;
+	stack_a->nb_moves++;
 	return (push(stack_a, stack_b));
 }
