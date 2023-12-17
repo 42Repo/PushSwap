@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 04:30:56 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 07:57:51 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,13 +268,12 @@ void	update_stack(t_stack *stk_a, t_stack *stk_b)
 	stk_b->median = stk_b->range / 2;
 }
 
-void	push_cheapeast(t_stack *stack_a, t_stack *stack_b, t_node *target,
+void	push_cheapeast(t_stack *stack_a, t_stack *stack_b,
 		enum e_instru **tab_instruction)
 {
 	int	i;
 	int	max;
 
-	(void)target;
 	i = 0;
 	max = find_max_range(stack_a, stack_b);
 	while (i < max)
@@ -327,7 +326,7 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 		final_rotate(stack_a);
 		return (0);
 	}
-	push_cheapeast(stack_a, stack_b, tmp, tab_instru);
+	push_cheapeast(stack_a, stack_b, tab_instru);
 	free(tab_instru[1]);
 	free(tab_instru[0]);
 	free(tab_instru);
@@ -454,12 +453,11 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 	return (target);
 }
 
-void	push_cheapeast_a(t_stack *stack_b, t_stack *stack_a, t_node *target,
+void	push_cheapeast_a(t_stack *stack_b, t_stack *stack_a,
 		enum e_instru **tab_instruction)
 {
 	int	i;
 
-	(void)target;
 	i = 0;
 	while (i < (stack_a->range))
 	{
@@ -503,7 +501,7 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	}
 	stack_b->top = tmp;
 	tmp = min_lenght_a(stack_b, stack_a, &tab_instru);
-	push_cheapeast_a(stack_b, stack_a, tmp, tab_instru);
+	push_cheapeast_a(stack_b, stack_a, tab_instru);
 	free(tab_instru[1]);
 	free(tab_instru[0]);
 	free(tab_instru);

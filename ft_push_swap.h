@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 04:28:05 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 07:56:22 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_node
 	struct s_node	*target;
 	struct s_node	*next;
 	struct s_node	*previous;
-}	t_node;
+}					t_node;
 
 typedef struct s_stack
 {
@@ -34,9 +34,17 @@ typedef struct s_stack
 	t_node			*bottom;
 	enum e_instru	*moves;
 	int				nb_moves;
-}	t_stack;
+}					t_stack;
 
-enum e_instru
+typedef struct s_lis_data
+{
+	int				*arr;
+	int				*prev;
+	int				*result;
+	int				pos;
+}					t_lis_data;
+
+enum				e_instru
 {
 	i_nothing,
 	i_sa,
@@ -52,38 +60,39 @@ enum e_instru
 	i_rrr
 };
 
-int				check_input(char **argv);
-int				putstr_error(char *str);
-int				range_tab(char **argv);
-int				search_in_tab_int(int *tab, int nb);
-int				fill_tab_and_check_double(int **tab, char **argv);
-int				main_check_input_and_fill_tab(char **argv, int **tab);
-void			fill_stack_from_array(t_stack *stack, int *array, int size);
-void			clear_stack(t_stack *stack);
-void			push_to_stack(t_stack *stack, t_node *new_node);
-t_node			*create_new_node(int content);
-int				stack_is_sorted(t_stack *stack);
-int				sort_stack(t_stack *stack_a, t_stack *stack_b, int range,
-					int *tab_lis);
-int				rotate(t_stack *stack);
-int				push(t_stack *dest, t_stack *src);
-void			update_links(t_stack *dest, t_node *tmp);
-int				ss(t_stack *stack_a, t_stack *stack_b);
-int				swap(t_stack *stack);
-int				rr(t_stack *stack_a, t_stack *stack_b);
-int				reverse_rotate(t_stack *stack);
-int				rrr(t_stack *stack_a, t_stack *stack_b);
-t_node			*find_max(t_stack *stack);
-t_node			*find_min(t_stack *stack);
-int				sort_three(t_stack *stack_a);
-int				ra(t_stack *stack_a);
-int				rb(t_stack *stack_b, t_stack *stack_a);
-int				sa(t_stack *stack_a);
-int				sb(t_stack *stack_b, t_stack *stack_a);
-int				rra(t_stack *stack_a);
-int				rrb(t_stack *stack_b, t_stack *stack_a);
-int				pb(t_stack *stack_a, t_stack *stack_b);
-int				pa(t_stack *stack_a, t_stack *stack_b);
-int				*find_lis(t_stack *t_stack, int *arr, int n);
+int					check_input(char **argv);
+int					putstr_error(char *str);
+int					range_tab(char **argv);
+int					search_in_tab_int(int *tab, int nb);
+int					fill_tab_and_check_double(int **tab, char **argv);
+int					main_check_input_and_fill_tab(char **argv, int **tab);
+void				fill_stack_from_array(t_stack *stack, int *array, int size);
+void				clear_stack(t_stack *stack);
+void				push_to_stack(t_stack *stack, t_node *new_node);
+t_node				*create_new_node(int content);
+int					stack_is_sorted(t_stack *stack);
+int					sort_stack(t_stack *stack_a, t_stack *stack_b, int range,
+						int *tab_lis);
+int					rotate(t_stack *stack);
+int					push(t_stack *dest, t_stack *src);
+void				update_links(t_stack *dest, t_node *tmp);
+int					ss(t_stack *stack_a, t_stack *stack_b);
+int					swap(t_stack *stack);
+int					rr(t_stack *stack_a, t_stack *stack_b);
+int					reverse_rotate(t_stack *stack);
+int					rrr(t_stack *stack_a, t_stack *stack_b);
+t_node				*find_max(t_stack *stack);
+t_node				*find_min(t_stack *stack);
+int					sort_three(t_stack *stack_a);
+int					ra(t_stack *stack_a);
+int					rb(t_stack *stack_b, t_stack *stack_a);
+int					sa(t_stack *stack_a);
+int					sb(t_stack *stack_b, t_stack *stack_a);
+int					rra(t_stack *stack_a);
+int					rrb(t_stack *stack_b, t_stack *stack_a);
+int					pb(t_stack *stack_a, t_stack *stack_b);
+int					pa(t_stack *stack_a, t_stack *stack_b);
+int					*find_lis(t_stack *t_stack, int *arr, int n);
+int					max(int a, int b);
 
 #endif

@@ -14,7 +14,7 @@ BGreen	=	$(shell echo "\033[1;32m")
 RESET	=	$(shell echo "\033[0m")
 BRed	=	$(shell echo "\033[1;31m")
 NAME 	=	push_swap
-COMP 	=	gcc
+COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	main.c\
@@ -28,7 +28,8 @@ SRC		=	main.c\
 			ft_push_swap_rotate.c\
 			ft_push_swap_swap.c\
 			ft_push_swap_sort_three.c\
-			ft_push_swap_lis.c
+			ft_push_swap_lis.c\
+			ft_push_swap_lis_utils.c\
 
 
 OBJ = $(SRC:.c=.o)
@@ -41,7 +42,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@make --no-print-directory -C $(libft)
 	@cp $(libft)libft.a libft.a
-	@gcc -gdwarf-4 -fPIE $(CFLAGS) -o $(NAME) $(OBJ) libft.a
+	@clang -gdwarf-4 -fPIE -O3 $(CFLAGS) -o $(NAME) $(OBJ) libft.a
 	@echo "$(BGreen)Compilation OK$(RESET)"
 
 clean :
