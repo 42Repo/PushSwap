@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 07:59:36 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 08:05:13 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,33 @@ void	free_stack_final(t_stack *stack_a, t_stack *stack_b, int **tab)
 	free_tab(tab);
 	free_stack(stack_a);
 	free_stack(stack_b);
+}
+
+int	final_print(enum e_instru instru)
+{
+	if (instru == i_ra)
+		ft_printf("ra\n");
+	else if (instru == i_rb)
+		ft_printf("rb\n");
+	else if (instru == i_rr)
+		ft_printf("rr\n");
+	else if (instru == i_rra)
+		ft_printf("rra\n");
+	else if (instru == i_rrb)
+		ft_printf("rrb\n");
+	else if (instru == i_rrr)
+		ft_printf("rrr\n");
+	else if (instru == i_sa)
+		ft_printf("sa\n");
+	else if (instru == i_sb)
+		ft_printf("sb\n");
+	else if (instru == i_ss)
+		ft_printf("ss\n");
+	else if (instru == i_pa)
+		ft_printf("pa\n");
+	else if (instru == i_pb)
+		ft_printf("pb\n");
+	return (0);
 }
 
 int	main2(int argc, char **argv, int print)
@@ -109,28 +136,7 @@ int	main2(int argc, char **argv, int print)
 	i = 0;
 	while (i < stack_a.nb_moves && print == 1)
 	{
-		if (stack_a.moves[i] == i_ra)
-			ft_printf("ra\n");
-		else if (stack_a.moves[i] == i_rb)
-			ft_printf("rb\n");
-		else if (stack_a.moves[i] == i_rr)
-			ft_printf("rr\n");
-		else if (stack_a.moves[i] == i_rra)
-			ft_printf("rra\n");
-		else if (stack_a.moves[i] == i_rrb)
-			ft_printf("rrb\n");
-		else if (stack_a.moves[i] == i_rrr)
-			ft_printf("rrr\n");
-		else if (stack_a.moves[i] == i_sa)
-			ft_printf("sa\n");
-		else if (stack_a.moves[i] == i_sb)
-			ft_printf("sb\n");
-		else if (stack_a.moves[i] == i_ss)
-			ft_printf("ss\n");
-		else if (stack_a.moves[i] == i_pa)
-			ft_printf("pa\n");
-		else if (stack_a.moves[i] == i_pb)
-			ft_printf("pb\n");
+		final_print(stack_a.moves[i]);
 		i++;
 	}
 	n = stack_a.nb_moves;
@@ -191,28 +197,7 @@ int	main3(int argc, char **argv, int print)
 	i = 0;
 	while (i < stack_a.nb_moves && print == 1)
 	{
-		if (stack_a.moves[i] == i_ra)
-			ft_printf("ra\n");
-		else if (stack_a.moves[i] == i_rb)
-			ft_printf("rb\n");
-		else if (stack_a.moves[i] == i_rr)
-			ft_printf("rr\n");
-		else if (stack_a.moves[i] == i_rra)
-			ft_printf("rra\n");
-		else if (stack_a.moves[i] == i_rrb)
-			ft_printf("rrb\n");
-		else if (stack_a.moves[i] == i_rrr)
-			ft_printf("rrr\n");
-		else if (stack_a.moves[i] == i_sa)
-			ft_printf("sa\n");
-		else if (stack_a.moves[i] == i_sb)
-			ft_printf("sb\n");
-		else if (stack_a.moves[i] == i_ss)
-			ft_printf("ss\n");
-		else if (stack_a.moves[i] == i_pa)
-			ft_printf("pa\n");
-		else if (stack_a.moves[i] == i_pb)
-			ft_printf("pb\n");
+		final_print(stack_a.moves[i]);
 		i++;
 	}
 	n = stack_a.nb_moves;
