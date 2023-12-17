@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 02:44:25 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 04:28:05 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void			clear_stack(t_stack *stack);
 void			push_to_stack(t_stack *stack, t_node *new_node);
 t_node			*create_new_node(int content);
 int				stack_is_sorted(t_stack *stack);
-int				sort_stack(t_stack *stack_a, t_stack *stack_b, int range, int *tab_lis);
+int				sort_stack(t_stack *stack_a, t_stack *stack_b, int range,
+					int *tab_lis);
 int				rotate(t_stack *stack);
 int				push(t_stack *dest, t_stack *src);
 void			update_links(t_stack *dest, t_node *tmp);

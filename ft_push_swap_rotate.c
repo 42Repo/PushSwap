@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:09:47 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 02:47:40 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 04:28:35 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	rr(t_stack *stack_a, t_stack *stack_b)
 {
 	if (rotate(stack_a) == -1 || rotate(stack_b) == -1)
 		return (-1);
-	// ft_printf("rr\n");
 	stack_a->moves[stack_a->nb_moves] = i_rr;
 	stack_a->nb_moves++;
 	return (0);
@@ -43,7 +42,6 @@ int	rr(t_stack *stack_a, t_stack *stack_b)
 
 int	ra(t_stack *stack_a)
 {
-	// ft_printf("ra\n");
 	stack_a->moves[stack_a->nb_moves] = i_ra;
 	stack_a->nb_moves++;
 	return (rotate(stack_a));
@@ -51,7 +49,6 @@ int	ra(t_stack *stack_a)
 
 int	rb(t_stack *stack_b, t_stack *stack_a)
 {
-	// ft_printf("rb\n");
 	stack_a->moves[stack_a->nb_moves] = i_rb;
 	stack_a->nb_moves++;
 	return (rotate(stack_b));

@@ -6,13 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:46:56 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 23:32:12 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/17 04:23:35 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	max(int a, int b)
 {
