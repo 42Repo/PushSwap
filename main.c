@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/18 20:23:26 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/19 22:31:12 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,65 @@ int	final_print(enum e_instru instru)
 	return (0);
 }
 
+int	has_multiple_nb(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	while (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]) == 1)
+		i++;
+	while (str[i] == ' ')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]) == 1 || str[i] == '-' || str[i] == '+')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	len_argv(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i] != NULL)
+		i++;
+	return (i);
+}
+
+char **ft_join_argv(char **fake_argv, char **argv, int argc)
+{
+	int		i;
+	int		j;
+	char	**new_argv;
+	int		len;
+
+	len = len_argv(argv);
+	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
+	i = 0;
+	j = 0;
+	while (fake_argv[i] != NULL)
+	{
+		new_argv[i] = ft_strdup(fake_argv[i]);
+		i++;
+	}
+	while (argv[j] != NULL)
+	{
+		new_argv[i] = ft_strdup(argv[j]);
+		i++;
+		j++;
+	}
+	new_argv[i] = NULL;
+	free_argv(&fake_argv);
+	return (new_argv);
+}
+
 int	main2(int argc, char **argv, int print)
 {
 	int		range;
@@ -94,23 +153,34 @@ int	main2(int argc, char **argv, int print)
 	int		*lis_array;
 	int		n;
 	int		i;
+	char 	**fake_argv;
 
-	// char *fake_argv [5]= {"caca" , "5" ,"", "0", "2" };
-	// argv = fake_argv;
-	// argc = 5;
 	init_stack(&stack_a);
 	init_stack(&stack_b);
 	if (argc < 2)
 		return (0);
-	if (argc == 2)
+	if (argc != 2 && has_multiple_nb(argv[1]) == 1)
 	{
-		argv = ft_split(argv[1], ' ');
-		if (argv[0] == NULL)
+		fake_argv = ft_split(argv[1], ' ');
+		if (fake_argv[0] == NULL)
 		{
-			free_argv(&argv);
+			free_argv(&fake_argv);
 			return (putstr_error("Error\n"));
 		}
-		range = main_check_input_and_fill_tab(argv, &tab);
+		fake_argv = ft_join_argv(fake_argv, argv + 2, argc);
+		range = main_check_input_and_fill_tab(fake_argv, &tab);
+		free_argv(&fake_argv);
+	}
+	else if (argc == 2)
+	{
+		fake_argv = ft_split(argv[1], ' ');
+		if (fake_argv[0] == NULL)
+		{
+			free_argv(&fake_argv);
+			return (putstr_error("Error\n"));
+		}
+		range = main_check_input_and_fill_tab(fake_argv, &tab);
+		free_argv(&fake_argv);
 	}
 	else
 	{
@@ -118,8 +188,6 @@ int	main2(int argc, char **argv, int print)
 	}
 	if (range == -1)
 	{
-		if (argc == 2)
-			free_argv(&argv);
 		return (-1);
 	}
 	stack_a.range = range;
@@ -143,8 +211,6 @@ int	main2(int argc, char **argv, int print)
 		}
 	}
 	free(lis_array);
-	if (argc == 2)
-		free_argv(&argv);
 	i = 0;
 	while (i < stack_a.nb_moves && print == 1)
 	{
@@ -223,9 +289,10 @@ int	main(int argc, char **argv)
 	int	res;
 	int	res_bis;
 
-	res = main2(argc, argv, 0);
+	res = main2(argc, argv, 1);
 	if (res == -1)
 		return (-1);
+	return (0);
 	res_bis = main3(argc, argv, 0);
 	if (res_bis == -1)
 		return (-1);
