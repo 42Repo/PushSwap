@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/16 22:19:54 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/19 01:33:29 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_input(char **argv)
 	while (argv[i])
 	{
 		j = 0;
-		if (argv[i][j] == '-' || argv[i][j] == '+')
+		if ((argv[i][j] == '-' || argv[i][j] == '+') && argv[i][j + 1] != '\0')
 			j++;
 		while (argv[i][j])
 		{
@@ -31,6 +31,8 @@ int	check_input(char **argv)
 				return (-1);
 			j++;
 		}
+		if (j == 0 && argv[i][j] == '\0')
+			return (-1);
 		i++;
 	}
 	return (0);

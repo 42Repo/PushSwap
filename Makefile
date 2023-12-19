@@ -18,7 +18,6 @@ COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	main.c\
-			ft_push_swap.c\
 			ft_push_swap_utils.c\
 			ft_push_swap_input_check_and_create_tab.c\
 			ft_push_swap_fill_stack.c\

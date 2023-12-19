@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 08:27:09 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/18 20:23:26 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int	main2(int argc, char **argv, int print)
 	int		n;
 	int		i;
 
+	// char *fake_argv [5]= {"caca" , "5" ,"", "0", "2" };
+	// argv = fake_argv;
+	// argc = 5;
 	init_stack(&stack_a);
 	init_stack(&stack_b);
 	if (argc < 2)
@@ -102,10 +105,17 @@ int	main2(int argc, char **argv, int print)
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
+		if (argv[0] == NULL)
+		{
+			free_argv(&argv);
+			return (putstr_error("Error\n"));
+		}
 		range = main_check_input_and_fill_tab(argv, &tab);
 	}
 	else
+	{
 		range = main_check_input_and_fill_tab(argv + 1, &tab);
+	}
 	if (range == -1)
 	{
 		if (argc == 2)
@@ -210,11 +220,16 @@ int	main3(int argc, char **argv, int print)
 
 int	main(int argc, char **argv)
 {
-	int	max;
+	int	res;
+	int	res_bis;
 
-	max = 0;
-	max = main2(argc, argv, 0);
-	if (max > main3(argc, argv, 0))
+	res = main2(argc, argv, 0);
+	if (res == -1)
+		return (-1);
+	res_bis = main3(argc, argv, 0);
+	if (res_bis == -1)
+		return (-1);
+	if (res > res_bis)
 		main3(argc, argv, 1);
 	else
 		main2(argc, argv, 1);
