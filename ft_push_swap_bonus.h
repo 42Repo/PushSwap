@@ -1,20 +1,21 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   ft_push_swap_bonus.h                               :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2023/12/19 19:27:56 by asuc              #+#    #+#             */
-// /*   Updated: 2023/12/19 19:28:40 by asuc             ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push_swap_bonus.h                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/19 19:27:56 by asuc              #+#    #+#             */
+/*   Updated: 2023/12/19 23:03:54 by asuc             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #ifndef FT_PUSH_SWAP_BONUS_H
-// # define FT_PUSH_SWAP_BONUS_H
+#ifndef FT_PUSH_SWAP_BONUS_H
+# define FT_PUSH_SWAP_BONUS_H
 
-// # include "Libft/libft.h"
-// # include <stdio.h>
+# include "Libft/libft.h"
+# include <stdio.h>
+# include "ft_push_swap.h"
 
 // typedef struct s_node
 // {
@@ -62,4 +63,4 @@
 
 
 
-// #endif
+#endif
