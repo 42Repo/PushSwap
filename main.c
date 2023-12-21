@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/20 01:03:11 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/21 07:35:24 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ int	init_stack(t_stack *stack_a, t_stack *stack_b, int range)
 	return (0);
 }
 
-void	free_stack_final(t_stack *stack_a, t_stack *stack_b, int **tab)
+void	free_stack_final(t_stack *stack_a, t_stack *stack_b)
 {
 	free(stack_a->moves);
-	free_tab(tab);
 	free_stack(stack_a);
 	free_stack(stack_b);
 }
@@ -128,7 +127,7 @@ int	len_argv(char **argv)
 	return (i);
 }
 
-char **ft_join_argv(char **fake_argv, char **argv, int argc)
+char	**ft_join_argv(char **fake_argv, char **argv, int argc)
 {
 	int		i;
 	int		j;
@@ -196,33 +195,57 @@ int	check_input_main(char **argv, int argc, int **tab)
 	return (range);
 }
 
-int	main2(int argc, char **argv, int print)
+int	main_sort(t_stack *stack_a, t_stack	*stack_b, int range, int *lis_array)
 {
-	int		range;
+	while (stack_is_sorted(stack_a) == 0)
+	{
+		if (range == 2)
+			ra(stack_a);
+		else if (range == 3)
+			sort_three(stack_a);
+		else
+		{
+			sort_stack(stack_a, stack_b, lis_array);
+		}
+	}
+	return (0);
+}
+
+int	push_swap_with_lis(int print, int *tab, int range)
+{
 	t_stack	stack_a;
 	t_stack	stack_b;
 	int		*lis_array;
 	int		i;
-	int		*tab;
 
-	range = check_input_main(argv, argc, &tab);
-	if (range == -1)
-		return (-1);
+	i = 0;
 	init_stack(&stack_a, &stack_b, range);
 	lis_array = find_lis(&stack_a, tab, range);
 	fill_stack_from_array(&stack_a, tab, range);
-	while (stack_is_sorted(&stack_a) == 0)
-	{
-		if (range == 2)
-			ra(&stack_a);
-		else if (range == 3)
-			sort_three(&stack_a);
-		else
-		{
-			sort_stack(&stack_a, &stack_b, range, lis_array);
-		}
-	}
+	main_sort(&stack_a, &stack_b, range, lis_array);
 	free(lis_array);
+	while (i < stack_a.nb_moves && print == 1)
+	{
+		final_print(stack_a.moves[i]);
+		i++;
+	}
+	range = stack_a.nb_moves;
+	free_stack_final(&stack_a, &stack_b);
+	return (range);
+}
+
+int	push_swap_without_lis(int print, int *tab, int range)
+{
+	t_stack	stack_a;
+	t_stack	stack_b;
+	int		*lis_array;
+	int		i;
+
+	init_stack(&stack_a, &stack_b, range);
+	lis_array = NULL;
+	stack_a.size_lis = 0;
+	fill_stack_from_array(&stack_a, tab, range);
+	main_sort(&stack_a, &stack_b, range, lis_array);
 	i = 0;
 	while (i < stack_a.nb_moves && print == 1)
 	{
@@ -230,86 +253,30 @@ int	main2(int argc, char **argv, int print)
 		i++;
 	}
 	range = stack_a.nb_moves;
-	free_stack_final(&stack_a, &stack_b, &tab);
+	free_stack_final(&stack_a, &stack_b);
 	return (range);
 }
-
-// int	main3(int argc, char **argv, int print)
-// {
-// 	int		range;
-// 	int		*tab;
-// 	t_stack	stack_a;
-// 	t_stack	stack_b;
-// 	int		*lis_array;
-// 	int		n;
-// 	int		i;
-
-// 	init_stack(&stack_a);
-// 	if (argc < 2)
-// 		return (0);
-// 	if (argc == 2)
-// 	{
-// 		argv = ft_split(argv[1], ' ');
-// 		range = main_check_input_and_fill_tab(argv, &tab);
-// 	}
-// 	else
-// 		range = main_check_input_and_fill_tab(argv + 1, &tab);
-// 	if (range == -1)
-// 	{
-// 		if (argc == 2)
-// 			free_argv(&argv);
-// 		return (-1);
-// 	}
-// 	stack_a.range = range;
-// 	stack_b.range = 0;
-// 	stack_a.median = stack_a.range / 2;
-// 	stack_b.median = stack_b.range / 2;
-// 	stack_a.nb_moves = 0;
-// 	stack_a.moves = ft_calloc(sizeof(enum e_instru), (range * range));
-// 	n = range;
-// 	lis_array = find_lis(&stack_a, tab, n);
-// 	stack_a.size_lis = 0;
-// 	fill_stack_from_array(&stack_a, tab, range);
-// 	while (stack_is_sorted(&stack_a) == 0)
-// 	{
-// 		if (range == 2)
-// 			ra(&stack_a);
-// 		else if (range == 3)
-// 			sort_three(&stack_a);
-// 		else
-// 		{
-// 			sort_stack(&stack_a, &stack_b, range, lis_array);
-// 		}
-// 	}
-// 	free(lis_array);
-// 	if (argc == 2)
-// 		free_argv(&argv);
-// 	i = 0;
-// 	while (i < stack_a.nb_moves && print == 1)
-// 	{
-// 		final_print(stack_a.moves[i]);
-// 		i++;
-// 	}
-// 	n = stack_a.nb_moves;
-// 	free_stack_final(&stack_a, &stack_b, &tab);
-// 	return (n);
-// }
 
 int	main(int argc, char **argv)
 {
 	int	res;
-	// int	res_bis;
+	int	range;
+	int	*tab;
+	int	res_bis;
 
-	res = main2(argc, argv, 1);
+	range = check_input_main(argv, argc, &tab);
+	if (range == -1)
+		return (-1);
+	res = push_swap_with_lis(0, tab, range);
 	if (res == -1)
 		return (-1);
+	res_bis = push_swap_without_lis(0, tab, range);
+	if (res_bis == -1)
+		return (-1);
+	if (res > res_bis)
+		push_swap_without_lis(1, tab, range);
+	else
+		push_swap_with_lis(1, tab, range);
+	free_tab(&tab);
 	return (0);
-	// res_bis = main3(argc, argv, 0);
-	// if (res_bis == -1)
-	// 	return (-1);
-	// if (res > res_bis)
-	// 	main3(argc, argv, 1);
-	// else
-	// 	main2(argc, argv, 1);
-	// return (0);
 }

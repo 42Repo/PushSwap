@@ -6,13 +6,12 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/19 21:21:38 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/21 07:28:58 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-// check tout les argument de argv pour etre sur que ce ne soit que des chiffres
 int	check_input(char **argv)
 {
 	int	i;
@@ -28,7 +27,8 @@ int	check_input(char **argv)
 			j++;
 		while (argv[i][j])
 		{
-			if (ft_isdigit(argv[i][j]) == 0 && argv[i][j] != ' ' && argv[i][j] != '\t')
+			if (ft_isdigit(argv[i][j]) == 0 && argv[i][j] != ' '
+				&& argv[i][j] != '\t')
 				return (-1);
 			j++;
 		}

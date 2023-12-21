@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 08:26:20 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/21 07:13:48 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -510,9 +510,8 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	free(tab_instru);
 }
 
-int	sort_stack(t_stack *stack_a, t_stack *stack_b, int range, int *tab_lis)
+int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
 {
-	(void)range;
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
 		pb(stack_a, stack_b);
