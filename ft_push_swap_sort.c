@@ -6,27 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 07:13:48 by asuc             ###   ########.fr       */
+/*   Updated: 2023/12/21 08:09:53 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-int	stack_is_sorted(t_stack *stack)
-{
-	t_node	*tmp;
-
-	if (stack->top == NULL)
-		return (-1);
-	tmp = stack->top;
-	while (tmp->next != NULL)
-	{
-		if (tmp->content > tmp->next->content)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
 void	final_rotate(t_stack *stack_a)
 {

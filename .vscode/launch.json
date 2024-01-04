@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/asuc/Documents/42/PushSwap",
-      "program": "/home/asuc/Documents/42/PushSwap/build/Debug/outDebug",
+      "cwd": "/nfs/homes/asuc/Documents/42/All Project/PushSwap",
+      "program": "/nfs/homes/asuc/Documents/42/All Project/PushSwap/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
