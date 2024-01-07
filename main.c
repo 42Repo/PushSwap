@@ -6,43 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 07:35:24 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/07 22:27:10 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-void	free_stack(t_stack *stack)
-{
-	t_node	*tmp;
-
-	while (stack->top != NULL)
-	{
-		tmp = stack->top;
-		stack->top = stack->top->next;
-		free(tmp);
-	}
-}
-
-void	free_tab(int **tab)
-{
-	free(*tab);
-	*tab = NULL;
-}
-
-void	free_argv(char ***argv)
-{
-	int	i;
-
-	i = 0;
-	while ((*argv)[i] != NULL)
-	{
-		free((*argv)[i]);
-		i++;
-	}
-	free(*argv);
-	*argv = NULL;
-}
 
 int	init_stack(t_stack *stack_a, t_stack *stack_b, int range)
 {
@@ -59,13 +27,6 @@ int	init_stack(t_stack *stack_a, t_stack *stack_b, int range)
 	if (stack_a->moves == NULL)
 		return (putstr_error("Error\n"));
 	return (0);
-}
-
-void	free_stack_final(t_stack *stack_a, t_stack *stack_b)
-{
-	free(stack_a->moves);
-	free_stack(stack_a);
-	free_stack(stack_b);
 }
 
 int	final_print(enum e_instru instru)

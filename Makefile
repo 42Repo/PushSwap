@@ -29,6 +29,7 @@ SRC		=	main.c\
 			ft_push_swap_sort_three.c\
 			ft_push_swap_lis.c\
 			ft_push_swap_lis_utils.c\
+			ft_push_swap_free.c
 
 SRC_BONUS = ft_push_swap_bonus.c\
 			ft_push_swap_utils.c\
@@ -38,9 +39,10 @@ SRC_BONUS = ft_push_swap_bonus.c\
 			ft_push_swap_reverse_rotate_bonus.c\
 			ft_push_swap_rotate_bonus.c\
 			ft_push_swap_swap_bonus.c\
-
-
-
+			ft_push_swap_free_bonus.c\
+			ft_push_swap_check_input_bonus.c\
+			ft_push_swap_check_input_utils_bonus.c\
+			ft_push_swap_utils_bonus.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 07:14:19 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/07 22:28:10 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ int					pb(t_stack *stack_a, t_stack *stack_b);
 int					pa(t_stack *stack_a, t_stack *stack_b);
 int					*find_lis(t_stack *t_stack, int *arr, int n);
 int					max(int a, int b);
+void				free_stack(t_stack *stack);
+void				free_tab(int **tab);
+void				free_argv(char ***argv);
+void				free_stack_final(t_stack *stack_a, t_stack *stack_b);
 
 #endif
