@@ -54,3 +54,4 @@ push_swap
 .vscode/settings.json
 .vscode/*
 .vscode/launch.json
+checker

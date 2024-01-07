@@ -17,7 +17,7 @@ NAME 	=	push_swap
 COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
-SRC		=	main.c\
+SRC		=	ft_push_swap.c\
 			ft_push_swap_utils.c\
 			ft_push_swap_input_check_and_create_tab.c\
 			ft_push_swap_fill_stack.c\
@@ -45,6 +45,7 @@ SRC_BONUS = ft_push_swap_bonus.c\
 			ft_push_swap_utils_bonus.c
 
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all : $(NAME)
 
@@ -60,19 +61,22 @@ $(NAME) : $(OBJ)
 clean :
 	@make clean --no-print-directory -C $(libft)
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BONUS)
 	@echo "$(BRed)Erase .o files$(RESET)"
 
 fclean : clean
 	@make fclean --no-print-directory -C $(libft)
 	@rm -f $(NAME) libft.a
+	@rm -f checker
+	@rm -f push_swap
 	@echo "$(BRed)Erase $(NAME) and libft.a$(RESET)"
 
 re : fclean all
 
-bonus : all
+bonus : $(OBJ_BONUS)
 	@make --no-print-directory -C $(libft)
 	@cp $(libft)libft.a libft.a
-	@clang -gdwarf-4 -fPIE -O3 $(CFLAGS) -o checker $(SRC_BONUS) libft.a
+	@clang -gdwarf-4 -fPIE -O3 $(CFLAGS) -o checker $(OBJ_BONUS) libft.a
 	@echo "$(BGreen)Compilation OK$(RESET)"
 
 test : all
