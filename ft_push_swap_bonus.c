@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:28:52 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 08:42:37 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/07 22:23:50 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,27 +197,27 @@ int	check_input_main(char **argv, int argc, int **tab)
 
 int	parse_instru(char *line, t_stack *stack_a)
 {
-	if (ft_strncmp(line, "sa", ft_strlen(line) - 1) == 0)
+	if (ft_strlen(line) == 3 && ft_strncmp(line, "sa", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_sa;
-	else if (ft_strncmp(line, "sb", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "sb", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_sb;
-	else if (ft_strncmp(line, "ss", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "ss", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_ss;
-	else if (ft_strncmp(line, "pa", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "pa", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_pa;
-	else if (ft_strncmp(line, "pb", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "pb", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_pb;
-	else if (ft_strncmp(line, "ra", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "ra", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_ra;
-	else if (ft_strncmp(line, "rb", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "rb", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_rb;
-	else if (ft_strncmp(line, "rra", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 4 && ft_strncmp(line, "rra", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_rra;
-	else if (ft_strncmp(line, "rrb", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 4 && ft_strncmp(line, "rrb", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_rrb;
-	else if (ft_strncmp(line, "rrr", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 4 && ft_strncmp(line, "rrr", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_rrr;
-	else if (ft_strncmp(line, "rr", ft_strlen(line) - 1) == 0)
+	else if (ft_strlen(line) == 3 && ft_strncmp(line, "rr", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_rr;
 	else
 		return (-1);
@@ -261,23 +261,22 @@ int	checker(int *tab, int range)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	int		i;
 	char	*line;
-
-	i = 0;
 
 	init_stack(&stack_a, &stack_b, range);
 	fill_stack_from_array(&stack_a, tab, range);
 	line = get_next_line(0);
-	while (line > 0)
+	while (line != NULL)
 	{
 		if (parse_instru(line, &stack_a) == -1)
 			return (putstr_error("Error\n"));
-		// printf("line = %s\n", line);
-		// printf("stack_a.nb_moves = %d\n", stack_a.moves[stack_a.nb_moves - 1]);
 		free(line);
 		line = get_next_line(0);
-		i++;
+		if (line != NULL && line[ft_strlen(line) - 1] != '\n')
+		{
+			free_stack_final(&stack_a, &stack_b);
+			return (putstr_error("Error\n"));
+		}
 	}
 	make_moves(&stack_a, &stack_b);
 	if (stack_is_sorted(&stack_a) == 1 && stack_b.top == NULL)
@@ -285,17 +284,6 @@ int	checker(int *tab, int range)
 	else
 	{
 		ft_printf("KO\n");
-		while (stack_a.top != NULL)
-		{
-			ft_printf("%d\n", stack_a.top->content);
-			stack_a.top = stack_a.top->next;
-		}
-		int j = 0;
-		while (j < stack_a.nb_moves)
-		{
-			final_print(stack_a.moves[j]);
-			j++;
-		}
 	}
 	free_stack_final(&stack_a, &stack_b);
 	return (range);
