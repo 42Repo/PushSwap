@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 08:09:53 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/08 23:39:14 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	set_tab_instruction(enum e_instru *tab, int range)
 	}
 }
 
-// on optimise les coups en fonction des coups si on a rra et rrb on peut faire rrr et donc faires 1 moves au lieu de 2
 int	optimize_moves(enum e_instru ***tab_instruction_tmp)
 {
 	int	i;
@@ -520,5 +519,21 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
 		update_stack(stack_a, stack_b);
 	}
 	final_rotate(stack_a);
+	return (0);
+}
+
+int	main_sort(t_stack *stack_a, t_stack	*stack_b, int range, int *lis_array)
+{
+	while (stack_is_sorted(stack_a) == 0)
+	{
+		if (range == 2)
+			ra(stack_a);
+		else if (range == 3)
+			sort_three(stack_a);
+		else
+		{
+			sort_stack(stack_a, stack_b, lis_array);
+		}
+	}
 	return (0);
 }

@@ -29,7 +29,10 @@ SRC		=	ft_push_swap.c\
 			ft_push_swap_sort_three.c\
 			ft_push_swap_lis.c\
 			ft_push_swap_lis_utils.c\
-			ft_push_swap_free.c
+			ft_push_swap_free.c\
+			ft_push_swap_check_input_.c\
+			ft_push_swap_check_input_utils.c\
+			ft_push_swap_input_check_and_create_tab_utils.c
 
 SRC_BONUS = ft_push_swap_bonus.c\
 			ft_push_swap_utils.c\
@@ -42,7 +45,9 @@ SRC_BONUS = ft_push_swap_bonus.c\
 			ft_push_swap_free_bonus.c\
 			ft_push_swap_check_input_bonus.c\
 			ft_push_swap_check_input_utils_bonus.c\
-			ft_push_swap_utils_bonus.c
+			ft_push_swap_utils_bonus.c\
+			ft_push_swap_input_check_and_create_tab_utils.c
+
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)

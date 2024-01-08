@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/08 00:33:46 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/08 23:36:48 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,6 @@ int	check_input(char **argv)
 		}
 		if (j == 0 && argv[i][j] == '\0')
 			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-// check si il y a des
-int	range_tab(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i])
-		i++;
-	return (i);
-}
-
-int	search_in_tab_int(int *tab, int nb)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return (0);
-	while (tab[i])
-	{
-		if (tab[i] == nb)
-			return (1);
 		i++;
 	}
 	return (0);
@@ -137,13 +110,15 @@ int	main_check_input_and_fill_tab(char **argv, int **tab)
 {
 	int	range;
 
+	range = 0;
 	if (check_input(argv) == -1)
 		return (putstr_error("Error\n"));
 	if (check_input_special(argv) == -1)
 		return (putstr_error("Error\n"));
 	if (check_zero(argv) == -1)
 		return (putstr_error("Error\n"));
-	range = range_tab(argv);
+	while (argv[range])
+		range++;
 	(*tab) = ft_calloc(range, sizeof(int));
 	if (!(*tab))
 		return (putstr_error("Error\n"));

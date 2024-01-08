@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/07 22:28:10 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/08 23:35:24 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ enum				e_instru
 
 int					check_input(char **argv);
 int					putstr_error(char *str);
-int					range_tab(char **argv);
 int					search_in_tab_int(int *tab, int nb);
 int					fill_tab_and_check_double(int **tab, char **argv);
 int					main_check_input_and_fill_tab(char **argv, int **tab);
@@ -98,5 +97,11 @@ void				free_stack(t_stack *stack);
 void				free_tab(int **tab);
 void				free_argv(char ***argv);
 void				free_stack_final(t_stack *stack_a, t_stack *stack_b);
+int					check_input_main(char **argv, int argc, int **tab);
+int					main_sort(t_stack *stack_a, t_stack	*stack_b, int range,
+						int *lis_array);
+int					len_argv(char **argv);
+char				**ft_join_argv(char **fake_argv, char **argv, int argc);
+int					has_multiple_nb(char *str);
 
 #endif
