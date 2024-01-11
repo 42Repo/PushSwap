@@ -6,11 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:18:55 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/08 23:32:14 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/11 18:18:00 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
 int	check_single_string(char ***argv, char ***fake_argv, int **tab, int *range)
 {

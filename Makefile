@@ -17,36 +17,36 @@ NAME 	=	push_swap
 COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
-SRC		=	ft_push_swap.c\
-			ft_push_swap_utils.c\
-			ft_push_swap_input_check_and_create_tab.c\
-			ft_push_swap_fill_stack.c\
-			ft_push_swap_sort.c\
-			ft_push_swap_push.c\
-			ft_push_swap_reverse_rotate.c\
-			ft_push_swap_rotate.c\
-			ft_push_swap_swap.c\
-			ft_push_swap_sort_three.c\
-			ft_push_swap_lis.c\
-			ft_push_swap_lis_utils.c\
-			ft_push_swap_free.c\
-			ft_push_swap_check_input_.c\
-			ft_push_swap_check_input_utils.c\
-			ft_push_swap_input_check_and_create_tab_utils.c
+SRC		=	srcs/ft_push_swap.c\
+			srcs/ft_push_swap_utils.c\
+			srcs/ft_push_swap_input_check_and_create_tab.c\
+			srcs/ft_push_swap_fill_stack.c\
+			srcs/ft_push_swap_sort.c\
+			srcs/ft_push_swap_push.c\
+			srcs/ft_push_swap_reverse_rotate.c\
+			srcs/ft_push_swap_rotate.c\
+			srcs/ft_push_swap_swap.c\
+			srcs/ft_push_swap_sort_three.c\
+			srcs/ft_push_swap_lis.c\
+			srcs/ft_push_swap_lis_utils.c\
+			srcs/ft_push_swap_free.c\
+			srcs/ft_push_swap_check_input_.c\
+			srcs/ft_push_swap_check_input_utils.c\
+			srcs/ft_push_swap_input_check_and_create_tab_utils.c
 
-SRC_BONUS = ft_push_swap_bonus.c\
-			ft_push_swap_utils.c\
-			ft_push_swap_input_check_and_create_tab.c\
-			ft_push_swap_fill_stack.c\
-			ft_push_swap_push_bonus.c\
-			ft_push_swap_reverse_rotate_bonus.c\
-			ft_push_swap_rotate_bonus.c\
-			ft_push_swap_swap_bonus.c\
-			ft_push_swap_free_bonus.c\
-			ft_push_swap_check_input_bonus.c\
-			ft_push_swap_check_input_utils_bonus.c\
-			ft_push_swap_utils_bonus.c\
-			ft_push_swap_input_check_and_create_tab_utils.c
+SRC_BONUS = bonus/ft_push_swap_bonus.c\
+			bonus/ft_push_swap_utils.c\
+			bonus/ft_push_swap_input_check_and_create_tab.c\
+			bonus/ft_push_swap_fill_stack.c\
+			bonus/ft_push_swap_push_bonus.c\
+			bonus/ft_push_swap_reverse_rotate_bonus.c\
+			bonus/ft_push_swap_rotate_bonus.c\
+			bonus/ft_push_swap_swap_bonus.c\
+			bonus/ft_push_swap_free_bonus.c\
+			bonus/ft_push_swap_check_input_bonus.c\
+			bonus/ft_push_swap_check_input_utils_bonus.c\
+			bonus/ft_push_swap_utils_bonus.c\
+			bonus/ft_push_swap_input_check_and_create_tab_utils.c
 
 
 OBJ = $(SRC:.c=.o)
