@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_rotate_bonus.c                        :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 08:02:16 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 08:04:24 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/11 18:40:31 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
 /* (rotate) : Décale d’une position vers le haut tous les élements de la pile :
 	Pour ca on a juste a mettre le bottom au top et decaler le top de 1 */

@@ -18,35 +18,34 @@ COMP 	=	clang
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	srcs/ft_push_swap.c\
-			srcs/ft_push_swap_utils.c\
-			srcs/ft_push_swap_input_check_and_create_tab.c\
-			srcs/ft_push_swap_fill_stack.c\
-			srcs/ft_push_swap_sort.c\
-			srcs/ft_push_swap_push.c\
-			srcs/ft_push_swap_reverse_rotate.c\
-			srcs/ft_push_swap_rotate.c\
-			srcs/ft_push_swap_swap.c\
-			srcs/ft_push_swap_sort_three.c\
-			srcs/ft_push_swap_lis.c\
-			srcs/ft_push_swap_lis_utils.c\
-			srcs/ft_push_swap_free.c\
-			srcs/ft_push_swap_check_input_.c\
-			srcs/ft_push_swap_check_input_utils.c\
-			srcs/ft_push_swap_input_check_and_create_tab_utils.c
+			srcs/utils.c\
+			srcs/input_check_and_create_tab.c\
+			srcs/fill_stack.c\
+			srcs/sort.c\
+			srcs/push.c\
+			srcs/reverse_rotate.c\
+			srcs/rotate.c\
+			srcs/swap.c\
+			srcs/sort_three.c\
+			srcs/lis.c\
+			srcs/lis_utils.c\
+			srcs/free.c\
+			srcs/check_input_.c\
+			srcs/check_input_utils.c\
+			srcs/input_check_and_create_tab_utils.c
 
-SRC_BONUS = bonus/ft_push_swap_bonus.c\
-			bonus/ft_push_swap_utils.c\
-			bonus/ft_push_swap_input_check_and_create_tab.c\
-			bonus/ft_push_swap_fill_stack.c\
-			bonus/ft_push_swap_push_bonus.c\
-			bonus/ft_push_swap_reverse_rotate_bonus.c\
-			bonus/ft_push_swap_rotate_bonus.c\
-			bonus/ft_push_swap_swap_bonus.c\
-			bonus/ft_push_swap_free_bonus.c\
-			bonus/ft_push_swap_check_input_bonus.c\
-			bonus/ft_push_swap_check_input_utils_bonus.c\
-			bonus/ft_push_swap_utils_bonus.c\
-			bonus/ft_push_swap_input_check_and_create_tab_utils.c
+SRC_BONUS = bonus/ft_push_swap.c\
+			bonus/utils.c\
+			bonus/input_check_and_create_tab.c\
+			bonus/fill_stack.c\
+			bonus/push.c\
+			bonus/reverse_rotate.c\
+			bonus/rotate.c\
+			bonus/swap.c\
+			bonus/free.c\
+			bonus/check_input.c\
+			bonus/check_input_utils.c\
+			bonus/input_check_and_create_tab_utils.c
 
 
 OBJ = $(SRC:.c=.o)

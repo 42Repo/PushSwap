@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_bonus.c                               :+:      :+:    :+:   */
+/*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:28:52 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/07 23:42:58 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/11 18:45:40 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
 int	get_instructions(t_stack *stack_a, t_stack *stack_b, char **line)
 {
@@ -29,6 +29,44 @@ int	get_instructions(t_stack *stack_a, t_stack *stack_b, char **line)
 		return (putstr_error("Error\n"));
 	}
 	return (0);
+}
+
+void	make_moves(t_stack *stack_a, t_stack *stack_b, int i)
+{
+	if (stack_a->moves[i] == i_sa)
+		sa(stack_a);
+	else if (stack_a->moves[i] == i_sb)
+		sb(stack_b);
+	else if (stack_a->moves[i] == i_ss)
+		ss(stack_a, stack_b);
+	else if (stack_a->moves[i] == i_pa)
+		pa(stack_a, stack_b);
+	else if (stack_a->moves[i] == i_pb)
+		pb(stack_a, stack_b);
+	else if (stack_a->moves[i] == i_ra)
+		ra(stack_a);
+	else if (stack_a->moves[i] == i_rb)
+		rb(stack_b);
+	else if (stack_a->moves[i] == i_rr)
+		rr(stack_a, stack_b);
+	else if (stack_a->moves[i] == i_rra)
+		rra(stack_a);
+	else if (stack_a->moves[i] == i_rrb)
+		rrb(stack_b);
+	else if (stack_a->moves[i] == i_rrr)
+		rrr(stack_a, stack_b);
+}
+
+void	make_moves_loop(t_stack *stack_a, t_stack *stack_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack_a->nb_moves)
+	{
+		make_moves(stack_a, stack_b, i);
+		i++;
+	}
 }
 
 int	checker(int *tab, int range)

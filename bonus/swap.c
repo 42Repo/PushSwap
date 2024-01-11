@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_swap_bonus.c                          :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:06:25 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/21 08:04:33 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/11 18:40:31 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
 /* (swap) : Intervertit les 2 premiers éléments au sommet de la pile.
 	Ne fait rien s’il n’y en a qu’un ou aucun. */
