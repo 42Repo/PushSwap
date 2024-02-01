@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:18:49 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/31 13:21:24 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct s_stack
 	t_node			*bottom;
 	enum e_instru	*moves;
 	int				nb_moves;
+	enum e_instru	**tab_instru;
+	int				max;
+	int				max_moves;
 }					t_stack;
 
 typedef struct s_lis_data
@@ -103,5 +106,6 @@ int					main_sort(t_stack *stack_a, t_stack	*stack_b, int range,
 int					len_argv(char **argv);
 char				**ft_join_argv(char **fake_argv, char **argv, int argc);
 int					has_multiple_nb(char *str);
+int					check_max_length(char **argv);
 
 #endif

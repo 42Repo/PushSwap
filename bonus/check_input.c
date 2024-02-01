@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:41 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:40:33 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/27 20:43:08 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	check_single_string(char ***argv, char ***fake_argv, int **tab, int *range)
 
 int	check_multiple_strings(char ***fake_argv, char **argv, int argc, int **tab)
 {
+	int	range;
+
 	(*fake_argv) = ft_split(argv[1], ' ');
 	if ((*fake_argv)[0] == NULL)
 	{
@@ -34,7 +36,13 @@ int	check_multiple_strings(char ***fake_argv, char **argv, int argc, int **tab)
 		return (putstr_error("Error\n"));
 	}
 	(*fake_argv) = ft_join_argv((*fake_argv), argv + 2, argc);
-	return (main_check_input_and_fill_tab((*fake_argv), tab));
+	range = main_check_input_and_fill_tab((*fake_argv), tab);
+	if (range == -1)
+	{
+		free_argv(fake_argv);
+		return (-1);
+	}
+	return (range);
 }
 
 int	check_input_main(char **argv, int argc, int **tab)

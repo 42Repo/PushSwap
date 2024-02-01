@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_sort.c                                :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/08 23:39:14 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/31 14:52:17 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ int	find_max_range(t_stack *stack_a, t_stack *stack_b)
 	return (max);
 }
 
-t_node	*find_closer_min(int nb, t_stack *stack)
+t_node	*find_target_min(t_stack *stack, int nb)
 {
 	t_node	*tmp;
 	t_node	*target;
-	int		max;
 
 	tmp = stack->top;
 	target = NULL;
@@ -52,21 +51,37 @@ t_node	*find_closer_min(int nb, t_stack *stack)
 			target = tmp;
 		tmp = tmp->next;
 	}
-	if (target == NULL)
+	return (target);
+}
+
+t_node	*find_max_min(t_stack *stack)
+{
+	t_node	*tmp;
+	t_node	*max_node;
+	int		max_value;
+
+	tmp = stack->top;
+	max_node = stack->top;
+	max_value = stack->top->content;
+	while (tmp != NULL)
 	{
-		tmp = stack->top;
-		max = stack->top->content;
-		target = stack->top;
-		while (tmp != NULL)
+		if (max_value < tmp->content)
 		{
-			if (max < tmp->content)
-			{
-				max = tmp->content;
-				target = tmp;
-			}
-			tmp = tmp->next;
+			max_value = tmp->content;
+			max_node = tmp;
 		}
+		tmp = tmp->next;
 	}
+	return (max_node);
+}
+
+t_node	*find_closer_min(int nb, t_stack *stack)
+{
+	t_node	*target;
+
+	target = find_target_min(stack, nb);
+	if (target == NULL)
+		target = find_max_min(stack);
 	return (target);
 }
 
@@ -78,16 +93,43 @@ void	init_tab_instruction(enum e_instru ***tab, int range)
 	(*tab)[2] = NULL;
 }
 
-void	set_tab_instruction(enum e_instru *tab, int range)
+void	set_tab_instruction(enum e_instru **tab, int range)
 {
 	int	i;
 
 	i = 0;
+		printf("max = %d", range);
 	while (i < range)
 	{
-		tab[i] = 0;
+		(*tab)[i] = 0;
 		i++;
 	}
+}
+
+int	optimize_moves_loop(enum e_instru ***tab_instruction_tmp, int i, int *moves)
+{
+	if ((*tab_instruction_tmp)[0][i] == i_ra
+		&& (*tab_instruction_tmp)[1][i] == i_rb)
+	{
+		((*tab_instruction_tmp)[0][i] = i_rr);
+		((*tab_instruction_tmp)[1][i] = i_nothing);
+		(*moves)++;
+	}
+	else if ((*tab_instruction_tmp)[0][i] == i_rra
+		&& (*tab_instruction_tmp)[1][i] == i_rrb)
+	{
+		((*tab_instruction_tmp)[0][i] = i_rrr);
+		((*tab_instruction_tmp)[1][i] = i_nothing);
+		(*moves)++;
+	}
+	else
+	{
+		if ((*tab_instruction_tmp)[0][i] != i_nothing)
+			(*moves)++;
+		if ((*tab_instruction_tmp)[1][i] != i_nothing)
+			(*moves)++;
+	}
+	return (0);
 }
 
 int	optimize_moves(enum e_instru ***tab_instruction_tmp)
@@ -100,27 +142,7 @@ int	optimize_moves(enum e_instru ***tab_instruction_tmp)
 	while ((*tab_instruction_tmp)[0][i] != i_nothing
 		|| (*tab_instruction_tmp)[1][i] != i_nothing)
 	{
-		if ((*tab_instruction_tmp)[0][i] == i_ra
-			&& (*tab_instruction_tmp)[1][i] == i_rb)
-		{
-			((*tab_instruction_tmp)[0][i] = i_rr);
-			((*tab_instruction_tmp)[1][i] = i_nothing);
-			moves++;
-		}
-		else if ((*tab_instruction_tmp)[0][i] == i_rra
-			&& (*tab_instruction_tmp)[1][i] == i_rrb)
-		{
-			((*tab_instruction_tmp)[0][i] = i_rrr);
-			((*tab_instruction_tmp)[1][i] = i_nothing);
-			moves++;
-		}
-		else
-		{
-			if ((*tab_instruction_tmp)[0][i] != i_nothing)
-				moves++;
-			if ((*tab_instruction_tmp)[1][i] != i_nothing)
-				moves++;
-		}
+		optimize_moves_loop(tab_instruction_tmp, i, &moves);
 		i++;
 	}
 	return (moves);
@@ -140,8 +162,150 @@ int	is_in_tab(int *tab, int nb, int size)
 	return (0);
 }
 
-t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
-		enum e_instru ***tab_instruction, int *tab)
+// int min_lengt_loop(t_stack *stack_a, t_stack *stack_b,
+// 		enum e_instru ***tab_instruction, int *tab)
+// {
+// 	set_tab_instruction(tab_instruction_tmp[0], max);
+// 	set_tab_instruction(tab_instruction_tmp[1], max);
+// 	rank_tmp = tmp->rank;
+// 	if (rank_tmp <= stack_a->median)
+// 	{
+// 		while (i < tmp->rank)
+// 		{
+// 			tab_instruction_tmp[0][i] = i_ra;
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		while (i <= (stack_a->range - tmp->rank) - 1)
+// 		{
+// 			tab_instruction_tmp[0][i] = i_rra;
+// 			i++;
+// 		}
+// 	}
+// 	rank_tmp = tmp->target->rank;
+// 	i = 0;
+// 	if (rank_tmp <= stack_b->median)
+// 	{
+// 		while (i < tmp->target->rank)
+// 		{
+// 			tab_instruction_tmp[1][i] = i_rb;
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		while (i <= (stack_b->range - tmp->target->rank) - 1)
+// 		{
+// 			tab_instruction_tmp[1][i] = i_rrb;
+// 			i++;
+// 		}
+// 	}
+// 	i = 0;
+// 	moves = optimize_moves(&tab_instruction_tmp);
+// 	if (moves < max_moves && is_in_tab(tab, tmp->content,
+// 			stack_a->size_lis) == 0)
+// 	{
+// 		max_moves = moves;
+// 		set_tab_instruction((*tab_instruction)[0], max);
+// 		set_tab_instruction((*tab_instruction)[1], max);
+// 		while (i < max)
+// 		{
+// 			(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];
+// 			(*tab_instruction)[1][i] = tab_instruction_tmp[1][i];
+// 			i++;
+// 		}
+// 		target = tmp;
+// 	}
+// 	if (max_moves <= 1)
+// 		break ;
+// 	tmp = tmp->next;
+// }
+
+// void	fill_tab_instruction_tmp(t_node *tmp, t_stack *stack_a, t_stack *stack_b, enum e_instru ***tab_instruction_tmp)
+// {
+// 	int	i;
+// 	int	rank_tmp;
+// 	int	max;
+
+// 	i = 0;
+// 	max = find_max_range(stack_a, stack_b);
+// 	set_tab_instruction((*tab_instruction_tmp)[0], max);
+// 	set_tab_instruction((*tab_instruction_tmp)[1], max);
+// 	rank_tmp = tmp->rank;
+// 	if (rank_tmp <= stack_a->median)
+// 		while (i < tmp->rank)
+// 			(*tab_instruction_tmp)[0][i++] = i_ra;
+// 	else
+// 		while (i <= (stack_a->range - tmp->rank) - 1)
+// 			(*tab_instruction_tmp)[0][i++] = i_rra;
+// 	rank_tmp = tmp->target->rank;
+// 	i = 0;
+// 	if (rank_tmp <= stack_b->median)
+// 		while (i < tmp->target->rank)
+// 			(*tab_instruction_tmp)[1][i++] = i_rb;
+// 	else
+// 		while (i <= (stack_b->range - tmp->target->rank) - 1)
+// 			(*tab_instruction_tmp)[1][i++] = i_rrb;
+// }
+
+// t_node	*fill_tab_instruction(t_stack *stack_a,
+// 		enum e_instru ***tab_instruction_tmp, int *tab, t_node	*tmp)
+// {
+// 	int		i;
+// 	int		moves;
+// 	t_node	*target;
+
+// 	i = 0;
+// 	target = NULL;
+
+// 	moves = optimize_moves(tab_instruction_tmp);
+// 	if (moves < stack_a->max_moves && is_in_tab(tab, tmp->content,
+// 			stack_a->size_lis) == 0)
+// 	{
+// 		stack_a->max_moves = moves;
+// 		set_tab_instruction((stack_a->tab_instru)[0], stack_a->max);
+// 		set_tab_instruction((stack_a->tab_instru)[1], stack_a->max);
+// 		while (i < stack_a->max)
+// 		{
+// 			(stack_a->tab_instru)[0][i] = (*tab_instruction_tmp)[0][i];
+// 			(stack_a->tab_instru)[1][i] = (*tab_instruction_tmp)[1][i];
+// 			i++;
+// 		}
+// 		target = tmp;
+// 	}
+// 	if (stack_a->max_moves <= 1)
+// 		return (target);
+// 	return (target);
+// }
+
+// t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab)
+// {
+// 	t_node			*tmp;
+// 	t_node			*target;
+// 	enum e_instru	**tab_instruction_tmp;
+
+// 	stack_a->max = find_max_range(stack_a, stack_b);
+// 	init_tab_instruction(&tab_instruction_tmp, stack_a->max);
+// 	tmp = stack_a->top;
+// 	target = NULL;
+// 	stack_a->max_moves = 4 * stack_a->max;
+// 	while (tmp != NULL)
+// 	{
+// 		fill_tab_instruction_tmp(tmp, stack_a, stack_b, &tab_instruction_tmp);
+// 		target = fill_tab_instruction(stack_a, &tab_instruction_tmp, tab, tmp);
+// 		tmp = tmp->next;
+// 	}
+// 	free(tab_instruction_tmp[1]);
+// 	free(tab_instruction_tmp[0]);
+// 	free(tab_instruction_tmp);
+// 	return (target);
+// }
+
+
+
+t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab)
 {
 	t_node			*tmp;
 	t_node			*target;
@@ -153,6 +317,8 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	int				max;
 
 	max = find_max_range(stack_a, stack_b);
+	// printf("max = %d", stack_b->range * 10);
+	// exit(0);
 	init_tab_instruction(&tab_instruction_tmp, max);
 	tmp = stack_a->top;
 	target = NULL;
@@ -161,8 +327,8 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	{
 		moves = 0;
 		i = 0;
-		set_tab_instruction(tab_instruction_tmp[0], max);
-		set_tab_instruction(tab_instruction_tmp[1], max);
+		set_tab_instruction(&(tab_instruction_tmp[0]), max);
+		set_tab_instruction(&(tab_instruction_tmp[1]), max);
 		rank_tmp = tmp->rank;
 		if (rank_tmp <= stack_a->median)
 		{
@@ -204,12 +370,12 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 				stack_a->size_lis) == 0)
 		{
 			max_moves = moves;
-			set_tab_instruction((*tab_instruction)[0], max);
-			set_tab_instruction((*tab_instruction)[1], max);
+			set_tab_instruction(&(stack_a->tab_instru[0]), max);
+			set_tab_instruction(&(stack_a->tab_instru[1]), max);
 			while (i < max)
 			{
-				(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];
-				(*tab_instruction)[1][i] = tab_instruction_tmp[1][i];
+				// (stack_a->tab_instru)[0][i] = tab_instruction_tmp[0][i];
+				// (stack_a->tab_instru)[1][i] = tab_instruction_tmp[1][i];
 				i++;
 			}
 			target = tmp;
@@ -223,6 +389,7 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b,
 	free(tab_instruction_tmp);
 	return (target);
 }
+
 
 void	update_stack(t_stack *stk_a, t_stack *stk_b)
 {
@@ -286,15 +453,21 @@ void	push_cheapeast(t_stack *stack_a, t_stack *stack_b,
 int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 {
 	t_node			*tmp;
-	enum e_instru	**tab_instru;
+	// enum e_instru	**tab_instruction;
 
 	if (stack_a->range > stack_b->range)
 	{
-		init_tab_instruction(&tab_instru, stack_a->range);
+		(stack_a->tab_instru) = malloc(3 * sizeof(enum e_instru *));
+		(stack_a->tab_instru)[0] = ft_calloc(stack_a->range * 10, sizeof(enum e_instru));
+		(stack_a->tab_instru)[1] = ft_calloc(stack_a->range * 10, sizeof(enum e_instru));
+		(stack_a->tab_instru)[2] = NULL;
 	}
 	else
 	{
-		init_tab_instruction(&tab_instru, stack_b->range);
+		(stack_a->tab_instru) = malloc(3 * sizeof(enum e_instru *));
+		(stack_a->tab_instru)[0] = ft_calloc(stack_b->range * 10, sizeof(enum e_instru));
+		(stack_a->tab_instru)[1] = ft_calloc(stack_b->range * 10, sizeof(enum e_instru));
+		(stack_a->tab_instru)[2] = NULL;
 	}
 	tmp = stack_a->top;
 	while (stack_a->top != NULL)
@@ -303,19 +476,21 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 		stack_a->top = stack_a->top->next;
 	}
 	stack_a->top = tmp;
-	tmp = min_lenght(stack_a, stack_b, &tab_instru, tab);
+	tmp = min_lenght(stack_a, stack_b, tab);
 	if (tmp == NULL)
 	{
 		final_rotate(stack_a);
-		free(tab_instru[1]);
-		free(tab_instru[0]);
-		free(tab_instru);
+		free((stack_a->tab_instru)[1]);
+		free((stack_a->tab_instru)[0]);
+		free(stack_a->tab_instru);
 		return (0);
 	}
-	push_cheapeast(stack_a, stack_b, tab_instru);
-	free(tab_instru[1]);
-	free(tab_instru[0]);
-	free(tab_instru);
+	printf("tmp = %p\n", tmp);
+	push_cheapeast(stack_a, stack_b, stack_a->tab_instru);
+	free(stack_a->tab_instru[1]);
+	free(stack_a->tab_instru[0]);
+	free(stack_a->tab_instru);
+	exit(0);
 	return (0);
 }
 
@@ -373,8 +548,8 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 	{
 		moves = 0;
 		i = 0;
-		set_tab_instruction(tab_instruction_tmp[0], max);
-		set_tab_instruction(tab_instruction_tmp[1], max);
+		set_tab_instruction(&(tab_instruction_tmp[0]), max);
+		set_tab_instruction(&(tab_instruction_tmp[1]), max);
 		rank_tmp = tmp->rank;
 		while (rank_tmp != 0)
 		{
@@ -419,8 +594,8 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a,
 		if (moves < max_moves)
 		{
 			max_moves = moves;
-			set_tab_instruction((*tab_instruction)[0], max);
-			set_tab_instruction((*tab_instruction)[1], max);
+			set_tab_instruction(&(*tab_instruction)[0], max);
+			set_tab_instruction(&(*tab_instruction)[1], max);
 			while (i < max)
 			{
 				(*tab_instruction)[0][i] = tab_instruction_tmp[0][i];

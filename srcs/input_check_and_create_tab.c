@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_input_check_and_create_tab.c          :+:      :+:    :+:   */
+/*   input_check_and_create_tab.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/08 23:36:48 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/27 20:20:10 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	fill_tab_and_check_double(int **tab, char **argv)
 
 int	check_input_special(char **argv)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (argv[i])
@@ -116,6 +116,8 @@ int	main_check_input_and_fill_tab(char **argv, int **tab)
 	if (check_input_special(argv) == -1)
 		return (putstr_error("Error\n"));
 	if (check_zero(argv) == -1)
+		return (putstr_error("Error\n"));
+	if (check_max_length(argv) == -1)
 		return (putstr_error("Error\n"));
 	while (argv[range])
 		range++;

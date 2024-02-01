@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_check_input_.c                        :+:      :+:    :+:   */
+/*   check_input_.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:18:55 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:18:00 by asuc             ###   ########.fr       */
+/*   Updated: 2024/01/27 20:25:26 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int	check_input_main(char **argv, int argc, int **tab)
 	if (argc != 2 && has_multiple_nb(argv[1]) == 1)
 	{
 		range = check_multiple_strings(&fake_argv, argv, argc, tab);
-		if (range == -1)
-			return (-1);
 		free_argv(&fake_argv);
+		if (range == -1)
+		{
+			free_argv(&fake_argv);
+			return (-1);
+		}
 	}
 	else if (argc == 2)
 	{
