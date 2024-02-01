@@ -32,7 +32,14 @@ SRC		=	srcs/ft_push_swap.c\
 			srcs/free.c\
 			srcs/check_input_.c\
 			srcs/check_input_utils.c\
-			srcs/input_check_and_create_tab_utils.c
+			srcs/input_check_and_create_tab_utils.c \
+			srcs/sort_part1.c \
+			srcs/sort_part1_utils.c \
+			srcs/sort_part2.c \
+			srcs/sort_part2_utils.c \
+			srcs/sort_utils.c \
+			srcs/sort_utils2.c
+
 
 SRC_BONUS = bonus/ft_push_swap.c\
 			bonus/utils.c\

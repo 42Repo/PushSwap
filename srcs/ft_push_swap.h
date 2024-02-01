@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/31 13:21:24 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/01 20:24:26 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,21 @@ int					len_argv(char **argv);
 char				**ft_join_argv(char **fake_argv, char **argv, int argc);
 int					has_multiple_nb(char *str);
 int					check_max_length(char **argv);
+void	set_tab_instruction(enum e_instru **tab, int range);
+void	free_tab_instruction(enum e_instru ***tab);
+void	final_rotate(t_stack *stack_a);
+int	find_max_range(t_stack *stack_a, t_stack *stack_b);
+int	optimize_moves(enum e_instru ***tab_instruction_tmp);
+void	init_tab_instruction(enum e_instru ***tab, int range);
+int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab);
+
+
+/* FUNCTIONS */
+t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a)
+;
+t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab)
+;
+void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
+;
 
 #endif
