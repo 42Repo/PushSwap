@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:34:24 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 23:46:47 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 18:49:45 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	fill_tab_rb(t_node *tmp,
 {
 	int	i;
 	int	rank_tmp;
-	int	moves;
 
 	i = 0;
-	moves = 0;
 	rank_tmp = tmp->rank;
 	while (rank_tmp != 0)
 	{
@@ -28,13 +26,11 @@ void	fill_tab_rb(t_node *tmp,
 		{
 			rank_tmp--;
 			(*tab_instruction_tmp)[0][i] = i_rb;
-			moves++;
 		}
 		else
 		{
 			rank_tmp++;
 			(*tab_instruction_tmp)[0][i] = i_rrb;
-			moves++;
 		}
 		if (rank_tmp == stack_b->range)
 			rank_tmp = 0;
@@ -47,9 +43,7 @@ void	fill_tab_ra(t_node *tmp,
 {
 	int	i;
 	int	rank_tmp;
-	int	moves;
 
-	moves = 0;
 	rank_tmp = tmp->target->rank;
 	i = 0;
 	while (rank_tmp != 0)
@@ -58,13 +52,11 @@ void	fill_tab_ra(t_node *tmp,
 		{
 			rank_tmp--;
 			(*tab_instruction_tmp)[1][i] = i_ra;
-			moves++;
 		}
 		else
 		{
 			rank_tmp++;
 			(*tab_instruction_tmp)[1][i] = i_rra;
-			moves++;
 		}
 		if (rank_tmp == stack_a->range)
 			rank_tmp = 0;
