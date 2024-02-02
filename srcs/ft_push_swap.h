@@ -122,6 +122,12 @@ int	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b);
 
 
 /* FUNCTIONS */
+int	final_print(enum e_instru instru)
+;
+int	init_stack(t_stack *stack_a, t_stack *stack_b, int range)
+;
+int	free_error(int **tab)
+;
 int	set_init_tab_construction(t_stack *stack_a, t_stack *stack_b)
 ;
 int	free_tab_instruction_and_return(enum e_instru ***tab, int ret)

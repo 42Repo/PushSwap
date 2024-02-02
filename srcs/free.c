@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_free.c                                :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:25:19 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/07 22:25:55 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:06:31 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ void	free_stack_final(t_stack *stack_a, t_stack *stack_b)
 	free(stack_a->moves);
 	free_stack(stack_a);
 	free_stack(stack_b);
+}
+
+int	free_error(int **tab)
+{
+	free_tab(tab);
+	return (ft_putstr_fd("Error\n", 2));
 }

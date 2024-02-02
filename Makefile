@@ -38,7 +38,8 @@ SRC		=	srcs/ft_push_swap.c\
 			srcs/sort_part2.c \
 			srcs/sort_part2_utils.c \
 			srcs/sort_utils.c \
-			srcs/sort_utils2.c
+			srcs/sort_utils2.c \
+			srcs/push_swap_utils.c
 
 
 SRC_BONUS = bonus/ft_push_swap.c\
