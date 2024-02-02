@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_reverse_rotate.c                      :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:45:18 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 04:28:44 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "../includes/ft_push_swap.h"
 
 /* (reverse rotate) : Décale d’une position vers le bas tous les élements
 	Le dernier élément devient le premier.*/

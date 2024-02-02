@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 01:06:05 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:24:18 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PUSH_SWAP_H
 
 # include "../Libft/libft.h"
-# include <stdio.h>
 
 typedef struct s_node
 {
@@ -108,29 +107,25 @@ char				**ft_join_argv(char **fake_argv, char **argv, int argc);
 int					has_multiple_nb(char *str);
 int					check_max_length(char **argv);
 void				set_tab_instruction(enum e_instru **tab, int range);
-void	free_tab_instruction(enum e_instru ***tab);
-void	final_rotate(t_stack *stack_a);
-int	find_max_range(t_stack *stack_a, t_stack *stack_b);
-int	optimize_moves(enum e_instru ***tab_instruction_tmp);
-int	init_tab_instruction(enum e_instru ***tab, int range);
-int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab);
-int	*free_arrays(int **lis, t_lis_data *lis_data);
-int	check_lis(t_stack *stack, int range);
-t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a);
-t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab);
-int	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b);
-
-
-/* FUNCTIONS */
-int	final_print(enum e_instru instru)
-;
-int	init_stack(t_stack *stack_a, t_stack *stack_b, int range)
-;
-int	free_error(int **tab)
-;
-int	set_init_tab_construction(t_stack *stack_a, t_stack *stack_b)
-;
-int	free_tab_instruction_and_return(enum e_instru ***tab, int ret)
-;
+void				free_tab_instruction(enum e_instru ***tab);
+void				final_rotate(t_stack *stack_a);
+int					find_max_range(t_stack *stack_a, t_stack *stack_b);
+int					optimize_moves(enum e_instru ***tab_instruction_tmp);
+int					init_tab_instruction(enum e_instru ***tab, int range);
+int					push_cheapeast_number_to_b(t_stack *stack_a,
+						t_stack *stack_b, int *tab);
+int					*free_arrays(int **lis, t_lis_data *lis_data);
+int					check_lis(t_stack *stack, int range);
+t_node				*min_lenght_a(t_stack *stack_b, t_stack *stack_a);
+t_node				*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab);
+int					push_cheapeast_number_to_a(t_stack *stack_a,
+						t_stack *stack_b);
+int					final_print(enum e_instru instru);
+int					init_stack(t_stack *stack_a, t_stack *stack_b, int range);
+int					free_error(int **tab);
+int					set_init_tab_construction(t_stack *stack_a,
+						t_stack *stack_b);
+int					free_tab_instruction_and_return(enum e_instru ***tab,
+						int ret);
 
 #endif

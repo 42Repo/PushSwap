@@ -6,11 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 16:17:09 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "../includes/ft_push_swap.h"
 
 int	check_input(char **argv)
 {

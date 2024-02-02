@@ -6,11 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 18:42:00 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "../includes/ft_push_swap.h"
 
 void	update_stack(t_stack *stk_a, t_stack *stk_b)
 {

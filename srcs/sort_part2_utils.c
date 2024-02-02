@@ -6,11 +6,11 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:34:24 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 18:49:45 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "../includes/ft_push_swap.h"
 
 void	fill_tab_rb(t_node *tmp,
 			t_stack *stack_b, enum e_instru ***tab_instruction_tmp)
