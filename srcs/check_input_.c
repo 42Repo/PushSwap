@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:18:55 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 16:16:57 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/01 21:41:25 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,17 @@ int	check_input_main(char **argv, int argc, int **tab)
 	char	**fake_argv;
 	int		range;
 
-	if (argc < 2)
-		return (0);
 	if (argc != 2 && has_multiple_nb(argv[1]) == 1)
 	{
 		range = check_multiple_strings(&fake_argv, argv, argc, tab);
 		free_argv(&fake_argv);
 		if (range == -1)
-		{
-			free_argv(&fake_argv);
 			return (-1);
-		}
 	}
 	else if (argc == 2)
 	{
-		if (check_single_string(&argv, &fake_argv, tab, &range) == -1)
+		range = check_single_string(&argv, &fake_argv, tab, &range);
+		if (range == -1)
 			return (-1);
 	}
 	else

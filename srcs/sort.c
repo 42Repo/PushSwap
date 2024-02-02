@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:25:28 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 01:33:24 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
 	}
 	while (stack_a->range > 3 && stack_is_sorted(stack_a) == 0)
 	{
-		push_cheapeast_number_to_b(stack_a, stack_b, tab_lis);
+		if (push_cheapeast_number_to_b(stack_a, stack_b, tab_lis) == -1)
+			return (-1);
 		update_stack(stack_a, stack_b);
 	}
 	if (stack_is_sorted(stack_a) == 0)
@@ -61,7 +62,8 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
 	update_stack(stack_a, stack_b);
 	while (stack_b->range > 0)
 	{
-		push_cheapeast_number_to_a(stack_a, stack_b);
+		if (push_cheapeast_number_to_a(stack_a, stack_b) == -1)
+			return (-1);
 		update_stack(stack_a, stack_b);
 	}
 	final_rotate(stack_a);
@@ -77,7 +79,8 @@ int	main_sort(t_stack *stack_a, t_stack	*stack_b, int range, int *lis_array)
 		else if (range == 3)
 			sort_three(stack_a);
 		else
-			sort_stack(stack_a, stack_b, lis_array);
+			if (sort_stack(stack_a, stack_b, lis_array) == -1)
+				return (-1);
 	}
 	return (0);
 }

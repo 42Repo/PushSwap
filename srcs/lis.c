@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap_lis.c                                 :+:      :+:    :+:   */
+/*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 07:34:36 by asuc              #+#    #+#             */
-/*   Updated: 2023/12/17 08:32:16 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 01:05:10 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,19 @@ static void	update_lis(int *arr, int *lis, int *prev, int n)
 	}
 }
 
-static void	initialize_arrays(int *arr, int n, int **lis, int **prev)
+static int	initialize_arrays(int *arr, int n, int **lis, int **prev)
 {
 	int	i;
 
 	*lis = (int *)malloc(n * sizeof(int));
+	if (!*lis)
+		return (1);
 	*prev = (int *)malloc(n * sizeof(int));
-	if (!*lis || !*prev)
-		return ;
+	if (!*prev)
+	{
+		free(*lis);
+		return (1);
+	}
 	i = 0;
 	while (i < n)
 	{
@@ -50,6 +55,7 @@ static void	initialize_arrays(int *arr, int n, int **lis, int **prev)
 		i++;
 	}
 	update_lis(arr, *lis, *prev, n);
+	return (0);
 }
 
 static void	construct_lis(t_lis_data *data, int idx)
@@ -93,13 +99,12 @@ int	*find_lis(t_stack *t_stack, int *arr, int n)
 	lis_data = (t_lis_data *)malloc(sizeof(t_lis_data));
 	if (!lis_data)
 		return (NULL);
-	initialize_arrays(arr, n, &lis, &lis_data->prev);
-	if (!lis || !lis_data->prev)
+	if (initialize_arrays(arr, n, &lis, &lis_data->prev))
 		return (NULL);
 	max_idx = find_max_lis_index(lis, n, &max_lis);
 	lis_data->result = (int *)ft_calloc(max_lis, sizeof(int));
 	if (!lis_data->result)
-		return (NULL);
+		return (free_arrays(&lis, lis_data));
 	lis_data->pos = 0;
 	lis_data->arr = arr;
 	construct_lis(lis_data, max_idx);

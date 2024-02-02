@@ -6,18 +6,32 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:18:40 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:27:42 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/01 23:24:37 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	init_tab_instruction(enum e_instru ***tab, int range)
+int	init_tab_instruction(enum e_instru ***tab, int range)
 {
 	(*tab) = malloc(3 * sizeof(enum e_instru *));
+	if (!(*tab))
+		return (-1);
 	(*tab)[0] = ft_calloc((range * 10), sizeof(enum e_instru));
+	if (!(*tab)[0])
+	{
+		free(*tab);
+		return (-1);
+	}
 	(*tab)[1] = ft_calloc((range * 10), sizeof(enum e_instru));
+	if (!(*tab)[1])
+	{
+		free(*tab);
+		free((*tab)[0]);
+		return (-1);
+	}
 	(*tab)[2] = NULL;
+	return (0);
 }
 
 void	set_tab_instruction(enum e_instru **tab, int range)

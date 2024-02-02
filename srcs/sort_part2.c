@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:24:36 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:36:21 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 01:32:38 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,12 @@ void	push_cheapeast_a(t_stack *stack_b, t_stack *stack_a)
 	pa(stack_a, stack_b);
 }
 
-void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
+int	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node			*tmp;
 
-	if (stack_a->range > stack_b->range)
-		init_tab_instruction(&(stack_a->tab_instru), stack_a->range);
-	else
-		init_tab_instruction(&(stack_a->tab_instru), stack_b->range);
+	if (set_init_tab_construction(stack_a, stack_b) == -1)
+		return (-1);
 	tmp = stack_b->top;
 	while (stack_b->top != NULL)
 	{
@@ -104,6 +102,12 @@ void	push_cheapeast_number_to_a(t_stack *stack_a, t_stack *stack_b)
 	}
 	stack_b->top = tmp;
 	tmp = min_lenght_a(stack_b, stack_a);
+	if (tmp == NULL && check_lis(stack_b, 2) == -1)
+	{
+		free_tab_instruction(&(stack_a->tab_instru));
+		return (-1);
+	}
 	push_cheapeast_a(stack_b, stack_a);
 	free_tab_instruction(&(stack_a->tab_instru));
+	return (0);
 }

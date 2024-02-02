@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:32:07 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:34:03 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 00:10:21 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab)
 
 	stack_a->max = find_max_range(stack_a, stack_b);
 	init_tab_instruction(&tab_instruction_tmp, stack_a->max);
+	if (tab_instruction_tmp == NULL)
+		return (NULL);
 	tmp = stack_a->top;
 	target = NULL;
 	stack_a->max_moves = stack_a->max * 4;
@@ -101,8 +103,6 @@ t_node	*min_lenght(t_stack *stack_a, t_stack *stack_b, int *tab)
 			target = target_tmp;
 		tmp = tmp->next;
 	}
-	free(tab_instruction_tmp[1]);
-	free(tab_instruction_tmp[0]);
-	free(tab_instruction_tmp);
+	free_tab_instruction(&tab_instruction_tmp);
 	return (target);
 }

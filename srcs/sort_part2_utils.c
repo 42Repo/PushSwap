@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:34:24 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:35:55 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/01 23:46:47 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ t_node	*min_lenght_a(t_stack *stack_b, t_stack *stack_a)
 
 	stack_a->max = find_max_range(stack_a, stack_b);
 	init_tab_instruction(&tab_instruction_tmp, stack_a->max);
+	if (tab_instruction_tmp == NULL)
+		return (NULL);
 	tmp = stack_b->top;
 	target = NULL;
 	stack_a->max_moves = stack_a->max * 4;

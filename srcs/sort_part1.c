@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:15:01 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 20:33:41 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 01:32:26 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 {
 	t_node			*tmp;
 
-	if (stack_a->range > stack_b->range)
-		init_tab_instruction(&(stack_a->tab_instru), stack_a->range);
-	else
-		init_tab_instruction(&(stack_a->tab_instru), stack_b->range);
+	if (set_init_tab_construction(stack_a, stack_b) == -1)
+		return (-1);
 	tmp = stack_a->top;
 	while (stack_a->top != NULL)
 	{
@@ -105,6 +103,9 @@ int	push_cheapeast_number_to_b(t_stack *stack_a, t_stack *stack_b, int *tab)
 	tmp = min_lenght(stack_a, stack_b, tab);
 	if (tmp == NULL)
 	{
+		if (check_lis(stack_a, 2) == -1 && stack_a->size_lis == 0)
+			return (free_tab_instruction_and_return(&(stack_a->tab_instru),
+					-1));
 		final_rotate(stack_a);
 		free_tab_instruction(&(stack_a->tab_instru));
 		return (0);
