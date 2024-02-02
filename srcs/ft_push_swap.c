@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 20:15:59 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:43:16 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 	tab = NULL;
 	range = check_input_main(argv, argc, &tab);
 	if (range == -1)
-		return (ft_putstr_fd("Error\n", 2));
+		return (-1);
 	res_bis = push_swap_without_lis(0, tab, range);
 	if (res_bis == -1)
 		return (free_error(&tab));

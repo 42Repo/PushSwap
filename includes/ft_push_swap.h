@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 20:24:18 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 20:43:03 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_PUSH_SWAP_H
 
 # include "../Libft/libft.h"
+# include <stdio.h>
+
 
 typedef struct s_node
 {
