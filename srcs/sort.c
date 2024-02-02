@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 14:48:34 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 01:33:24 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/02 18:42:00 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	update_stack(t_stack *stk_a, t_stack *stk_b)
 	stk_b->median = stk_b->range / 2;
 }
 
-int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
+void	prepare_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_is_sorted(stack_a) == 0 && stack_a->range > 3)
 	{
@@ -51,6 +51,11 @@ int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
 		pb(stack_a, stack_b);
 		update_stack(stack_a, stack_b);
 	}
+}
+
+int	sort_stack(t_stack *stack_a, t_stack *stack_b, int *tab_lis)
+{
+	prepare_stack(stack_a, stack_b);
 	while (stack_a->range > 3 && stack_is_sorted(stack_a) == 0)
 	{
 		if (push_cheapeast_number_to_b(stack_a, stack_b, tab_lis) == -1)
