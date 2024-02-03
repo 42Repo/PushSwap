@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:58 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:40:31 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:39:47 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,51 @@ int	len_argv(char **argv)
 	return (i);
 }
 
+static char	**free_error_join(char **fake_argv)
+{
+	free_argv(&fake_argv);
+	return (NULL);
+}
+
+
+char	**free_all(char **new_argv, int i, char **fake_argv)
+{
+	while (i >= 0)
+	{
+		free(new_argv[i]);
+		i--;
+	}
+	free(new_argv);
+	free_argv(&fake_argv);
+	return (NULL);
+}
+
 char	**ft_join_argv(char **fake_argv, char **argv, int argc)
 {
 	int		i;
 	int		j;
-	char	**new_argv;
 	int		len;
+	char	**new_argv;
 
-	len = len_argv(argv);
-	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
 	i = 0;
 	j = 0;
+	len = len_argv((fake_argv));
+	(void)argc;
+	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
+	if (new_argv == NULL)
+		return (free_error_join(fake_argv));
 	while (fake_argv[i] != NULL)
 	{
 		new_argv[i] = ft_strdup(fake_argv[i]);
+		if (new_argv[i] == NULL)
+			return (free_all(new_argv, i - 1, fake_argv));
 		i++;
 	}
 	while (argv[j] != NULL)
 	{
 		new_argv[i] = ft_strdup(argv[j]);
+		if (new_argv[i] == NULL)
+			return (free_all(new_argv, i - 1, fake_argv));
 		i++;
 		j++;
 	}

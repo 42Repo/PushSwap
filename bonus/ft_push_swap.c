@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:28:52 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:45:40 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:37:28 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,14 @@ int	checker(int *tab, int range)
 	char	*line;
 
 	init_stack(&stack_a, &stack_b, range);
-	fill_stack_from_array(&stack_a, tab, range);
+	if (stack_a.moves == NULL)
+		return (-1);
+	if (fill_stack_from_array(&stack_a, tab, range) == -1)
+	{
+		free(stack_a.moves);
+		clear_stack(&stack_b);
+		return (-1);
+	}
 	line = get_next_line(0);
 	while (line != NULL)
 	{
@@ -87,9 +94,7 @@ int	checker(int *tab, int range)
 	if (stack_is_sorted(&stack_a) == 1 && stack_b.top == NULL)
 		ft_printf("OK\n");
 	else
-	{
 		ft_printf("KO\n");
-	}
 	free_stack_final(&stack_a, &stack_b);
 	return (range);
 }
@@ -101,7 +106,7 @@ int	main(int argc, char **argv)
 	int	*tab;
 
 	if (argc < 2)
-		return (0);
+		return (ft_putstr_fd("Error\n", 2));
 	range = check_input_main(argv, argc, &tab);
 	if (range == -1)
 		return (-1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input_.c                                     :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:18:55 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:37:44 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,35 @@
 int	check_single_string(char ***argv, char ***fake_argv, int **tab, int *range)
 {
 	(*fake_argv) = ft_split((*argv)[1], ' ');
-	if ((*fake_argv)[0] == NULL)
+	if ((*fake_argv) == NULL)
+		return (putstr_error("Error\n"));
+	(*range) = main_check_input_and_fill_tab((*fake_argv), tab);
+	if ((*range) == -1)
 	{
 		free_argv(fake_argv);
-		return (putstr_error("Error\n"));
+		return (-1);
 	}
-	(*range) = main_check_input_and_fill_tab((*fake_argv), tab);
 	free_argv(fake_argv);
 	return (*range);
 }
 
 int	check_multiple_strings(char ***fake_argv, char **argv, int argc, int **tab)
 {
+	int	ret;
+
 	(*fake_argv) = ft_split(argv[1], ' ');
-	if ((*fake_argv)[0] == NULL)
+	if ((*fake_argv) == NULL)
+		return (putstr_error("Error\n"));
+	(*fake_argv) = ft_join_argv((*fake_argv), argv + 2, argc);
+	if ((*fake_argv) == NULL)
+		return (putstr_error("Error\n"));
+	ret = main_check_input_and_fill_tab((*fake_argv), tab);
+	if (ret == -1)
 	{
 		free_argv(fake_argv);
-		return (putstr_error("Error\n"));
+		return (-1);
 	}
-	(*fake_argv) = ft_join_argv((*fake_argv), argv + 2, argc);
-	return (main_check_input_and_fill_tab((*fake_argv), tab));
+	return (ret);
 }
 
 int	check_input_main(char **argv, int argc, int **tab)
@@ -45,9 +54,9 @@ int	check_input_main(char **argv, int argc, int **tab)
 	if (argc != 2 && has_multiple_nb(argv[1]) == 1)
 	{
 		range = check_multiple_strings(&fake_argv, argv, argc, tab);
-		free_argv(&fake_argv);
 		if (range == -1)
 			return (-1);
+		free_argv(&fake_argv);
 	}
 	else if (argc == 2)
 	{

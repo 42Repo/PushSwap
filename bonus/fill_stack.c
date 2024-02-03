@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:28:19 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:40:31 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:11:27 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	clear_stack(t_stack *stack)
 	stack->bottom = NULL;
 }
 
-void	fill_stack_from_array(t_stack *stack, int *array, int size)
+int	fill_stack_from_array(t_stack *stack, int *array, int size)
 {
 	int			i;
 	t_node		*new_node;
@@ -70,7 +70,7 @@ void	fill_stack_from_array(t_stack *stack, int *array, int size)
 		if (!new_node)
 		{
 			clear_stack(stack);
-			return ;
+			return (-1);
 		}
 		new_node->rank = i;
 		push_to_stack(stack, new_node);
@@ -78,4 +78,5 @@ void	fill_stack_from_array(t_stack *stack, int *array, int size)
 		stack->median = stack->range / 2;
 		i++;
 	}
+	return (0);
 }

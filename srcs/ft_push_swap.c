@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 20:43:16 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:08:04 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	lis_and_sort(t_stack *stack_a, t_stack *stack_b, int *tab, int range)
 	{
 		free(lis_array);
 		clear_stack(stack_b);
+		free(stack_a->moves);
 		return (-1);
 	}
 	if (main_sort(stack_a, stack_b, range, lis_array) == -1)
@@ -48,7 +49,8 @@ int	push_swap_with_lis(int print, int *tab, int range)
 	init_stack(&stack_a, &stack_b, range);
 	if (stack_a.moves == NULL)
 		return (-1);
-	lis_and_sort(&stack_a, &stack_b, tab, range);
+	if (lis_and_sort(&stack_a, &stack_b, tab, range) == -1)
+		return (-1);
 	while (i < stack_a.nb_moves && print == 1)
 		final_print(stack_a.moves[i++]);
 	range = stack_a.nb_moves;

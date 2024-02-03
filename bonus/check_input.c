@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:41 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/01 21:48:08 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:34:59 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,35 @@
 int	check_single_string(char ***argv, char ***fake_argv, int **tab, int *range)
 {
 	(*fake_argv) = ft_split((*argv)[1], ' ');
-	if ((*fake_argv)[0] == NULL)
+	if ((*fake_argv) == NULL)
+		return (putstr_error("Error\n"));
+	(*range) = main_check_input_and_fill_tab((*fake_argv), tab);
+	if ((*range) == -1)
 	{
 		free_argv(fake_argv);
-		return (putstr_error("Error\n"));
+		return (-1);
 	}
-	(*range) = main_check_input_and_fill_tab((*fake_argv), tab);
 	free_argv(fake_argv);
 	return (*range);
 }
 
 int	check_multiple_strings(char ***fake_argv, char **argv, int argc, int **tab)
 {
-	int	range;
+	int	ret;
 
 	(*fake_argv) = ft_split(argv[1], ' ');
-	if ((*fake_argv)[0] == NULL)
-	{
-		free_argv(fake_argv);
+	if ((*fake_argv) == NULL)
 		return (putstr_error("Error\n"));
-	}
 	(*fake_argv) = ft_join_argv((*fake_argv), argv + 2, argc);
-	range = main_check_input_and_fill_tab((*fake_argv), tab);
-	if (range == -1)
+	if ((*fake_argv) == NULL)
+		return (putstr_error("Error\n"));
+	ret = main_check_input_and_fill_tab((*fake_argv), tab);
+	if (ret == -1)
 	{
 		free_argv(fake_argv);
 		return (-1);
 	}
-	return (range);
+	return (ret);
 }
 
 int	check_input_main(char **argv, int argc, int **tab)
@@ -50,8 +51,6 @@ int	check_input_main(char **argv, int argc, int **tab)
 	char	**fake_argv;
 	int		range;
 
-	if (argc < 2)
-		return (-1);
 	if (argc != 2 && has_multiple_nb(argv[1]) == 1)
 	{
 		range = check_multiple_strings(&fake_argv, argv, argc, tab);

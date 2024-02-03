@@ -64,7 +64,8 @@
     "random": "c",
     "limits": "c",
     "algorithm": "c",
-    "functional": "c"
+    "functional": "c",
+    "stdio.h": "c"
   },
   "functionHeaderExtension.headerFilePath": "/nfs/homes/asuc/Documents/42/All Project/PushSwap/srcs/ft_push_swap.h"
 }

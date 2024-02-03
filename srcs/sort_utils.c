@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 20:18:40 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/02 20:16:55 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 00:05:04 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 int	init_tab_instruction(enum e_instru ***tab, int range)
 {
 	(*tab) = malloc(3 * sizeof(enum e_instru *));
-	if (!(*tab))
+	if (*tab == NULL)
 		return (-1);
 	(*tab)[0] = ft_calloc((range * 10), sizeof(enum e_instru));
-	if (!(*tab)[0])
+	if ((*tab)[0] == NULL)
 	{
 		free(*tab);
+		*tab = NULL;
 		return (-1);
 	}
 	(*tab)[1] = ft_calloc((range * 10), sizeof(enum e_instru));
-	if (!(*tab)[1])
+	if ((*tab)[1] == NULL)
 	{
-		free(*tab);
 		free((*tab)[0]);
+		free(*tab);
+		*tab = NULL;
 		return (-1);
 	}
 	(*tab)[2] = NULL;

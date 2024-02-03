@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/27 20:43:11 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/03 01:38:37 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ int	check_input(char **argv)
 {
 	int	i;
 	int	j;
+	int	bol;
 
 	i = 0;
+	bol = 0;
 	while (argv[i])
 	{
 		j = 0;
-		if (argv[i][j] == ' ' || argv[i][j] == '\t')
+		while (argv[i][j] == ' ' || argv[i][j] == '\t')
 			j++;
 		if ((argv[i][j] == '-' || argv[i][j] == '+') && argv[i][j + 1] != '\0')
 			j++;
-		while (argv[i][j])
+		while (argv[i][j++])
 		{
-			if (ft_isdigit(argv[i][j]) == 0 && argv[i][j] != ' '
-				&& argv[i][j] != '\t')
+			if (ft_isdigit(argv[i][j - 1]) == 0 && argv[i][j - 1] != ' '
+				&& argv[i][j - 1] != '\t')
 				return (-1);
-			j++;
+			bol = 1;
 		}
-		if (j == 0 && argv[i][j] == '\0')
+		if ((j == 1 && argv[i][j - 1] == '\0') || bol == 0)
 			return (-1);
 		i++;
 	}
@@ -62,8 +64,8 @@ int	fill_tab_and_check_double(int **tab, char **argv)
 
 int	check_input_special(char **argv)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (argv[i])
@@ -71,7 +73,7 @@ int	check_input_special(char **argv)
 		j = 0;
 		if (ft_atoi(argv[i]) > 2147483647 || ft_atoi(argv[i]) < -2147483648)
 			return (-1);
-		if (argv[i][j] == ' ' || argv[i][j] == '\t')
+		while (argv[i][j] == ' ' || argv[i][j] == '\t')
 			j++;
 		if (argv[i][j] == '-' || argv[i][j] == '+')
 			j++;

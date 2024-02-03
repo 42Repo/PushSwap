@@ -73,7 +73,7 @@ int					pb(t_stack *stack_a, t_stack *stack_b);
 int					pa(t_stack *stack_a, t_stack *stack_b);
 int					stack_is_sorted(t_stack *stack);
 int					main_check_input_and_fill_tab(char **argv, int **tab);
-void				fill_stack_from_array(t_stack *stack, int *array, int size);
+int					fill_stack_from_array(t_stack *stack, int *array, int size);
 int					putstr_error(char *str);
 void				free_argv(char ***argv);
 void				free_tab(int **tab);
@@ -89,5 +89,6 @@ int					final_print(enum e_instru instru);
 int					init_stack(t_stack *stack_a, t_stack *stack_b, int range);
 int					search_in_tab_int(int *tab, int nb);
 int					check_max_length(char **argv);
+void				clear_stack(t_stack *stack);
 
 #endif
