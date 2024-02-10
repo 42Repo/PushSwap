@@ -90,5 +90,7 @@ int					init_stack(t_stack *stack_a, t_stack *stack_b, int range);
 int					search_in_tab_int(int *tab, int nb);
 int					check_max_length(char **argv);
 void				clear_stack(t_stack *stack);
+int					check_input_nothing(char **argv);
+
 
 #endif

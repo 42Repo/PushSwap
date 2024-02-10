@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:34:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/03 00:51:27 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 15:14:37 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PUSH_SWAP_H
 
 # include "../Libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_node
 {
@@ -127,5 +128,6 @@ int					set_init_tab_construction(t_stack *stack_a,
 						t_stack *stack_b);
 int					free_tab_instruction_and_return(enum e_instru ***tab,
 						int ret);
+int					check_input_nothing(char **argv);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:30:17 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/03 01:27:19 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 15:21:59 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	**ft_join_argv(char **fake_argv, char **argv, int argc)
 	i = 0;
 	j = 0;
 	len = len_argv((fake_argv));
-	(void)argc;
 	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
 	if (new_argv == NULL)
 		return (free_error_join(fake_argv));
@@ -95,4 +94,3 @@ char	**ft_join_argv(char **fake_argv, char **argv, int argc)
 	free_argv(&fake_argv);
 	return (new_argv);
 }
-

@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:36:03 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/27 20:23:05 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 15:27:31 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,25 @@ int	check_max_length(char **argv)
 			return (-1);
 		i++;
 	}
+	return (0);
+}
+
+int	check_input_nothing(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j] == ' ' || argv[i][j] == '\t')
+			j++;
+		if (argv[i][j] == '\0')
+			return (-1);
+		i++;
+	}
+	if (i == 0)
+		return (-1);
 	return (0);
 }

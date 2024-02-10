@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:26:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/03 01:34:30 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 15:27:01 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int	main_check_input_and_fill_tab(char **argv, int **tab)
 	if (check_zero(argv) == -1)
 		return (putstr_error("Error\n"));
 	if (check_max_length(argv) == -1)
+		return (putstr_error("Error\n"));
+	if (check_input_nothing(argv) == -1)
 		return (putstr_error("Error\n"));
 	while (argv[range])
 		range++;

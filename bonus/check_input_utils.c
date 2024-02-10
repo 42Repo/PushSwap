@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:58 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/03 01:39:47 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 14:44:50 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static char	**free_error_join(char **fake_argv)
 	free_argv(&fake_argv);
 	return (NULL);
 }
-
 
 char	**free_all(char **new_argv, int i, char **fake_argv)
 {
