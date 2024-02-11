@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 23:30:17 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/10 15:21:59 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 20:46:50 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ int	len_argv(char **argv)
 	while (argv[i] != NULL)
 		i++;
 	return (i);
-}
-
-static char	**free_error_join(char **fake_argv)
-{
-	free_argv(&fake_argv);
-	return (NULL);
 }
 
 int	has_multiple_nb(char *str)
@@ -62,19 +56,13 @@ char	**free_all(char **new_argv, int i, char **fake_argv)
 	return (NULL);
 }
 
-char	**ft_join_argv(char **fake_argv, char **argv, int argc)
+char	**join_all_argv(char **fake_argv, char **argv, char **new_argv)
 {
 	int		i;
 	int		j;
-	int		len;
-	char	**new_argv;
 
 	i = 0;
 	j = 0;
-	len = len_argv((fake_argv));
-	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
-	if (new_argv == NULL)
-		return (free_error_join(fake_argv));
 	while (fake_argv[i] != NULL)
 	{
 		new_argv[i] = ft_strdup(fake_argv[i]);
@@ -92,5 +80,23 @@ char	**ft_join_argv(char **fake_argv, char **argv, int argc)
 	}
 	new_argv[i] = NULL;
 	free_argv(&fake_argv);
+	return (new_argv);
+}
+
+char	**ft_join_argv(char **fake_argv, char **argv, int argc)
+{
+	int		len;
+	char	**new_argv;
+
+	len = len_argv((fake_argv));
+	new_argv = ft_calloc(sizeof(char *), argc + len + 1);
+	if (new_argv == NULL)
+	{
+		free_argv(&fake_argv);
+		return (NULL);
+	}
+	new_argv = join_all_argv(fake_argv, argv, new_argv);
+	if (new_argv == NULL)
+		return (NULL);
 	return (new_argv);
 }

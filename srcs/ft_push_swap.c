@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:28:20 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/10 14:59:24 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/10 20:51:09 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	main(int argc, char **argv)
 	int	res_bis;
 
 	if (argc < 2)
-		return (ft_putstr_fd("Error\n", 2));
+		return (-1);
 	tab = NULL;
 	range = check_input_main(argv, argc, &tab);
 	if (range == -1)

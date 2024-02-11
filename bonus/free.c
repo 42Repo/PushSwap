@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:29:45 by asuc              #+#    #+#             */
-/*   Updated: 2024/01/11 18:40:31 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/11 09:35:37 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,11 @@ void	free_argv(char ***argv)
 	}
 	free(*argv);
 	*argv = NULL;
+}
+
+int	free_stack_and_moves(t_stack *stack_a, t_stack *stack_b)
+{
+	free(stack_a->moves);
+	free_stack(stack_b);
+	return (-1);
 }

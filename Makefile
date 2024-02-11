@@ -6,7 +6,7 @@
 #    By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 17:42:16 by asuc              #+#    #+#              #
-#    Updated: 2023/08/12 17:42:16 by asuc             ###   ########.fr        #
+#    Updated: 2024/02/10 20:24:42 by asuc             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ BGreen	=	$(shell echo "\033[1;32m")
 RESET	=	$(shell echo "\033[0m")
 BRed	=	$(shell echo "\033[1;31m")
 NAME 	=	push_swap
-COMP 	=	cc
+COMP 	=	gcc
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	srcs/ft_push_swap.c\

@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:41 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/03 01:34:59 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/11 09:27:07 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	check_input_main(char **argv, int argc, int **tab)
 
 int	compare_line_len_3(char *line, t_stack *stack_a)
 {
+	stack_a->moves = ft_realloc_enum(stack_a->moves, stack_a->nb_moves + 1);
 	if (ft_strncmp(line, "sa", ft_strlen(line) - 1) == 0)
 		stack_a->moves[stack_a->nb_moves++] = i_sa;
 	else if (ft_strncmp(line, "sb", ft_strlen(line) - 1) == 0)

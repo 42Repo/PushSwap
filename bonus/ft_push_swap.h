@@ -91,6 +91,7 @@ int					search_in_tab_int(int *tab, int nb);
 int					check_max_length(char **argv);
 void				clear_stack(t_stack *stack);
 int					check_input_nothing(char **argv);
-
+enum e_instru		*ft_realloc_enum(enum e_instru *str, int size);
+int					free_stack_and_moves(t_stack *stack_a, t_stack *stack_b);
 
 #endif
