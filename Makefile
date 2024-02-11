@@ -14,7 +14,8 @@ BGreen	=	$(shell echo "\033[1;32m")
 RESET	=	$(shell echo "\033[0m")
 BRed	=	$(shell echo "\033[1;31m")
 NAME 	=	push_swap
-COMP 	=	gcc
+NAME_BONUS = checker
+COMP 	=	cc
 CFLAGS 	=	-Wall -Werror -Wextra
 libft	=	Libft/
 SRC		=	srcs/ft_push_swap.c\
@@ -61,39 +62,31 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	@$(COMP) -gdwarf-4 -fPIE -O3 -march=native $(CFLAGS) -o $@ -c $<
+	@$(COMP) $(CFLAGS) -o $@ -c $<
 
 $(NAME) : $(OBJ)
 	@make --no-print-directory -C $(libft)
 	@cp $(libft)libft.a libft.a
-	@clang -gdwarf-4 -fPIE -O3 $(CFLAGS) -o $(NAME) $(OBJ) libft.a
+	@clang $(CFLAGS) -o $(NAME) $(OBJ) libft.a
 	@echo "$(BGreen)Compilation OK$(RESET)"
 
 bonus : $(OBJ_BONUS)
 	@make --no-print-directory -C $(libft)
 	@cp $(libft)libft.a libft.a
-	@clang -gdwarf-4 -fPIE -O3 $(CFLAGS) -o checker $(OBJ_BONUS) libft.a
+	@clang $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS) libft.a
 	@echo "$(BGreen)Compilation OK$(RESET)"
 
 clean :
 	@make clean --no-print-directory -C $(libft)
-	@rm -f $(OBJ)
-	@rm -f $(OBJ_BONUS)
+	@rm -f $(OBJ) $(OBJ_BONUS)
 	@echo "$(BRed)Erase .o files$(RESET)"
 
 fclean : clean
 	@make fclean --no-print-directory -C $(libft)
-	@rm -f $(NAME) libft.a
-	@rm -f checker
-	@rm -f push_swap
+	@rm -f $(NAME) $(NAME_BONUS) libft.a
 	@echo "$(BRed)Erase $(NAME) and libft.a$(RESET)"
 
 re : fclean all
-
-test : all
-	./push_swap-testeur-max/tester_push_swap
-	./push_swap-testeur-max/tester_push_swap leak
-	./Push_swap_tester/complexity 500 10 5500 ./checker
 
 .PHONY: all fclean clean re bonus
 

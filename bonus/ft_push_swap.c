@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:28:52 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/11 09:43:16 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/11 10:13:23 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	checker(int *tab, int range)
 		return (-1);
 	if (fill_stack_from_array(&stack_a, tab, range) == -1)
 		return (free_stack_and_moves(&stack_a, &stack_b));
-	free_stack_and_moves(&stack_a, &stack_b);
-	return (0);
 	line = get_next_line(0);
 	while (line != NULL)
 	{

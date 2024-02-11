@@ -6,7 +6,7 @@
 /*   By: asuc <asuc@student.42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:01:41 by asuc              #+#    #+#             */
-/*   Updated: 2024/02/11 09:27:07 by asuc             ###   ########.fr       */
+/*   Updated: 2024/02/11 10:04:22 by asuc             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	parse_instru(char *line, t_stack *stack_a)
 	}
 	else if (ft_strlen(line) == 4)
 	{
+		stack_a->moves = ft_realloc_enum(stack_a->moves, stack_a->nb_moves + 1);
 		if (ft_strncmp(line, "rra", ft_strlen(line) - 1) == 0)
 			stack_a->moves[stack_a->nb_moves++] = i_rra;
 		else if (ft_strncmp(line, "rrb", ft_strlen(line) - 1) == 0)
